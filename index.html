@@ -3,376 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EOTrans - 在线文件传输</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-        }
-
-        h1 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 2.5em;
-        }
-
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 0.95em;
-        }
-
-        .main-buttons {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 20px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-send {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .btn-send:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-receive {
-            background: #f8f9fa;
-            color: #333;
-            border: 2px solid #e9ecef;
-        }
-
-        .btn-receive:hover {
-            background: #e9ecef;
-            transform: translateY(-2px);
-        }
-
-        .section {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .file-input-wrapper {
-            margin: 20px 0;
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .file-label {
-            display: block;
-            padding: 40px 20px;
-            border: 2px dashed #667eea;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: #f8f9ff;
-        }
-
-        .file-label:hover {
-            background: #eef1ff;
-            border-color: #764ba2;
-        }
-
-        .file-label.dragover {
-            background: #e8ecff;
-            border-color: #764ba2;
-        }
-
-        .code-display {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin: 20px 0;
-        }
-
-        .code-display h3 {
-            margin-bottom: 15px;
-            font-size: 1em;
-            opacity: 0.9;
-        }
-
-        .code-number {
-            font-size: 3em;
-            font-weight: bold;
-            letter-spacing: 10px;
-            font-family: 'Courier New', monospace;
-        }
-
-        .code-input {
-            width: 100%;
-            padding: 15px;
-            font-size: 1.5em;
-            text-align: center;
-            letter-spacing: 8px;
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-        }
-
-        .code-input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .status {
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            font-size: 0.95em;
-        }
-
-        .status.info {
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-
-        .status.success {
-            background: #e8f5e9;
-            color: #388e3c;
-        }
-
-        .status.error {
-            background: #ffebee;
-            color: #c62828;
-        }
-
-        .status.waiting {
-            background: #fff3e0;
-            color: #f57c00;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: #e9ecef;
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 15px 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            transition: width 0.3s ease;
-        }
-
-        .back-btn {
-            background: none;
-            border: none;
-            color: #667eea;
-            cursor: pointer;
-            font-size: 0.9em;
-            margin-top: 20px;
-        }
-
-        .back-btn:hover {
-            text-decoration: underline;
-        }
-
-        .file-info {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-
-        .file-info p {
-            margin: 5px 0;
-            color: #666;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
+    <title>有兽焉 · 漫画交流站</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>📦 EOTrans</h1>
-        <p class="subtitle">安全、快速的点对点文件传输</p>
+    <!-- 导航栏 -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#home" class="nav-logo">有兽焉 FANS</a>
+            <button class="hamburger" id="hamburger" aria-label="菜单">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#report">剧情分析</a></li>
+                <li><a href="#cp">CP攻略</a></li>
+                <li><a href="#interact">粉丝互动</a></li>
+            </ul>
+            <button class="dark-toggle" id="darkToggle" title="切换暗色模式">&#9790;</button>
+        </div>
+    </nav>
 
-        <!-- 主界面 -->
-        <div id="mainSection" class="section active">
-            <div class="main-buttons">
-                <button class="btn btn-send" onclick="showSend()">
-                    📤 发送文件
-                </button>
-                <button class="btn btn-receive" onclick="showReceive()">
-                    📥 接收文件
-                </button>
+    <!-- 首页 -->
+    <section id="home">
+        <!-- 全屏封面图 -->
+        <div class="hero-cover">
+            <img src="images/cover.jpg" alt="有兽焉第五季海报">
+            <div class="hero-cover-overlay">
+                <h1 class="hero-main-title">有兽焉</h1>
+                <p class="hero-main-sub">漫画深度交流站</p>
             </div>
-            <p style="color: #999; font-size: 0.85em;">
-                无需服务器，端到端加密传输<br>
-                P2P直连，支持大文件传输
-            </p>
         </div>
 
-        <!-- 发送界面 -->
-        <div id="sendSection" class="section">
-            <div id="fileSelectArea">
-                <div class="file-input-wrapper">
-                    <input type="file" id="fileInput" class="file-input" multiple webkitdirectory>
-                    <label for="fileInput" class="file-label" id="fileLabel">
-                        <div>📁 点击或拖拽文件/文件夹到此处</div>
-                        <div style="font-size: 0.85em; color: #666; margin-top: 10px;">
-                            支持多文件、文件夹、任意格式
-                        </div>
-                    </label>
+        <!-- 作品介绍 -->
+        <div class="container">
+            <div class="intro-section">
+                <p class="intro-quote">"人间有神兽，来自九重天"</p>
+                <p class="intro-text">上古神兽貔貅皮皮来到了人间，为了躲避人类追捕，逃到了好友四不像开的专门帮助神兽的鹿人店，并结识了一群来自四面八方、性格各异的神兽，开始了远离人烟、轻松惬意的日常。</p>
+            </div>
+
+            <!-- 数据卡片 -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-num">1174+</div>
+                    <div class="stat-label">漫画话数</div>
                 </div>
-                <div style="margin-top: 10px; display: flex; gap: 10px; justify-content: center;">
-                    <button class="btn" onclick="selectFiles()" style="padding: 10px 20px; font-size: 0.9em;">选择文件</button>
-                    <button class="btn" onclick="selectFolder()" style="padding: 10px 20px; font-size: 0.9em; background: #f8f9fa; color: #333;">选择文件夹</button>
+                <div class="stat-card">
+                    <div class="stat-num">5季</div>
+                    <div class="stat-label">动画季数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num">4.1亿</div>
+                    <div class="stat-label">B站播放</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num">205万</div>
+                    <div class="stat-label">追番人数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num">9.6</div>
+                    <div class="stat-label">哔哩哔哩评分</div>
                 </div>
             </div>
 
-            <div id="waitingArea" class="hidden">
-                <div class="file-info" id="fileInfo"></div>
-                <div class="code-display">
-                    <h3>请告诉接收者以下数字</h3>
-                    <div class="code-number" id="sendCode">--------</div>
-                </div>
-                <div class="status waiting">
-                    <span class="spinner"></span>
-                    等待接收者连接...
-                </div>
-                <button class="btn" onclick="cancelSend()" style="margin-top: 15px; background: #ffebee; color: #c62828;">取消发送</button>
+            <!-- 作者信息 -->
+            <div class="author-bar">
+                <span>原作者：<strong>靴下猫腰子</strong></span>
+                <span>出品：<strong>分子互动</strong></span>
+                <span>动画配音：杨凝 / 阿杰 / 山新 / 李诗萌 / 金弦</span>
             </div>
 
-            <div id="sendingArea" class="hidden">
-                <div class="file-info" id="sendingFileInfo"></div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="sendProgress" style="width: 0%"></div>
-                </div>
-                <div class="status info" id="sendStatus">正在传输...</div>
-                <div style="margin-top: 10px; color: #666; font-size: 0.9em;">
-                    速度: <span id="sendSpeed">0 B/s</span>
-                </div>
+            <!-- 站内导航卡片 -->
+            <div class="nav-cards">
+                <a href="#report" class="nav-card">
+                    <div class="nav-card-icon"><img src="images/tianlu-snow.jpg" alt="天禄" class="nav-card-img"></div>
+                    <div class="nav-card-title">后续写作方向与大结局分析</div>
+                    <div class="nav-card-desc">叙事架构、核心未解之谜、8周年直播信息、短中长期预测、5个结局场景预演</div>
+                </a>
+                <a href="#cp" class="nav-card">
+                    <div class="nav-card-icon"><img src="images/pipi-wave.jpg" alt="皮皮" class="nav-card-img"></div>
+                    <div class="nav-card-title">CP全攻略与名场面索引</div>
+                    <div class="nav-card-desc">12组CP、121+条名场面、精确话数、星级评分、篇章标签</div>
+                </a>
+                <a href="#interact" class="nav-card">
+                    <div class="nav-card-icon"><img src="images/chugou.jpg" alt="刍狗" class="nav-card-img"></div>
+                    <div class="nav-card-title">粉丝互动</div>
+                    <div class="nav-card-desc">留言板、同人创作推荐、粉丝社群入口</div>
+                </a>
             </div>
-
-            <button class="back-btn" onclick="goBack()">← 返回主界面</button>
         </div>
+    </section>
 
-        <!-- 接收界面 -->
-        <div id="receiveSection" class="section">
-            <div id="codeInputArea">
-                <h3 style="margin-bottom: 15px; color: #333;">输入发送者的 8 位数字</h3>
-                <input type="text" id="receiveCode" class="code-input" 
-                       placeholder="--------" maxlength="8" 
-                       oninput="this.value = this.value.replace(/\D/g, '')">
-                <button class="btn btn-send" onclick="startReceive()" style="width: 100%;">
-                    开始接收
-                </button>
+    <!-- 后续写作方向与大结局分析 -->
+    <section id="report" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>后续写作方向与大结局深度分析</h2>
+                <p class="section-subtitle">基于已有剧情、作者8周年直播信息、粉丝深度讨论的多维度分析</p>
             </div>
-
-            <div id="confirmArea" class="hidden">
-                <h3 style="margin-bottom: 15px; color: #333;">📋 发送方文件列表</h3>
-                <div class="file-info" id="confirmFileList" style="max-height: 200px; overflow-y: auto; text-align: left;"></div>
-                <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
-                    <button class="btn btn-send" onclick="confirmReceive()" style="flex: 1;">✅ 确认接收</button>
-                    <button class="btn" onclick="rejectReceive()" style="flex: 1; background: #ffebee; color: #c62828;">❌ 拒绝</button>
-                </div>
+            <div class="card" id="reportContent">
+<p>────────────────────</p><p><strong>《有兽焉》</strong></p><p>后续写作方向与大结局深度分析报告</p><p>────────────────────</p><p><em>“建立在悲剧上的喜剧”——一部披着萌系日常外衣的史诗悲歌</em></p><table><tbody><tr class="odd"><td><strong>作品</strong></td><td>《有兽焉》 / Fabulous Beasts</td></tr><tr class="even"><td><strong>作者</strong></td><td>靴下猫腰子 / 非人哉工作室</td></tr><tr class="odd"><td><strong>当前进度</strong></td><td>漫画更新至第1168话（2026年4月）</td></tr><tr class="even"><td><strong>报告日期</strong></td><td>2026年4月11日</td></tr></tbody></table><p><strong>一、研究背景与方法论</strong></p><p><strong>1.1 研究目的</strong></p><p>《有兽焉》是由靴下猫腰子创作、非人哉工作室出品的国产漫画，自2017年10月15日开始连载，至2026年4月已更新至第1168话。本报告旨在基于已有剧情、作者8周年直播信息、粉丝深度讨论等多维度信息，深度分析该作品的后续写作方向与可能的大结局走向。</p><p><strong>1.2 分析框架</strong></p><ul><li><p>文本分析：梳理漫画四大篇章的叙事逻辑与伏笔网络</p></li><li><p>角色弧线分析：跟踪核心角色的成长轨迹与关系变迁</p></li><li><p>作者意图推断：结合靴下猫腰子8周年直播信息与微博动态</p></li><li><p>叙事结构预测：基于双线叙事、伏笔回收、情感递进等手法进行推演</p></li></ul><p><strong>1.3 核心前提</strong></p><p>《有兽焉》的叙事美学可以用一句话概括：<em><strong>“用最可爱的画风，讲述最沉重的故事”</strong></em>。这是一部“建立在悲剧上的喜剧”，所有分析均建立在这一核心前提之上。</p><p><strong>二、作品概览与叙事架构</strong></p><p><strong>2.1 基本信息</strong></p><table><tbody><tr class="odd"><td><strong>作品名称</strong></td><td>《有兽焉》 / Fabulous Beasts</td></tr><tr class="even"><td><strong>作者</strong></td><td>靴下猫腰子（非人哉工作室）</td></tr><tr class="odd"><td><strong>开始日期</strong></td><td>2017年10月15日</td></tr><tr class="even"><td><strong>当前进度</strong></td><td>漫画更新至第1168话，动画第五季播出中</td></tr><tr class="odd"><td><strong>更新频率</strong></td><td>每周二、四、日准0点更新</td></tr><tr class="even"><td><strong>单行本</strong></td><td>已出版11册，第12册已组稿完成</td></tr><tr class="odd"><td><strong>动画季数</strong></td><td>已播出5季（哔哩哔哩平台，评分9.5）</td></tr></tbody></table><p><strong>2.2 篇章结构与时间线</strong></p><p>《有兽焉》采用了独特的“双线叙事”结构，将完整的时间线分成多个篇章，由每段的开头向结尾讲述：</p><table><tbody><tr class="odd"><td><strong>篇章</strong></td><td><strong>话数范围</strong></td><td><strong>核心内容</strong></td></tr><tr class="even"><td>上古篇</td><td>140-262话</td><td>贬貅兄弟诞生，遇帝江、混沌，九乌陡落，帝江石化，混沌双翼俱焚</td></tr><tr class="odd"><td>中古篇</td><td>284-601话</td><td>人类出现，贬貅遇四不相，寻混沌重逢，混沌化作彩云山脉</td></tr><tr class="even"><td>近古篇</td><td>636话-未完结</td><td>辟邪身体虚弱，寻烛阴治疗，心锁事件，四不相死亡（未完结）</td></tr><tr class="odd"><td>现代篇</td><td>1话-进行中</td><td>主线时间线。天禄逃入鹿人店，记忆恢复，兄弟相认，对抗天庭</td></tr></tbody></table><p><strong>2.3 核心角色关系网络</strong></p><p>《有兽焉》的角色关系可以用三个“家庭”来概括：</p><p><strong>① “一家四口”——上古原初家庭</strong></p><p>天禄、辟邪、帝江、混沌。这是全作情感的核心。帝江的善良与牺牲、混沌的深情与执念、贬貅兄弟的羁绊——这些关系构成了故事最深层的悲剧底色。</p><p><strong>② “鹿人店一家”——现代家庭</strong></p><p>四不像、天禄、辟邪、兔爷、金角银角、二两八斤、吐宝鼠、谬听、战虎、七十七……这是日常篇的核心，也是喜剧外衣的载体。每一只神兽都有自己的悲伤过去，但在鹿人店找到了归属。</p><p><strong>③ “天庭”——隐形的控制者</strong></p><p>天庭代表着秩序、控制和压制。天尊的设计陷害、青鸟的监视、花大夫的潜伏、四不像制度的建立——天庭是所有悲剧的根源。</p><p><strong>三、当前剧情节点定位</strong></p><p>漫画目前处于现代篇后期，以下是关键剧情节点的时间线梳理：</p><table><tbody><tr class="odd"><td><strong>话数</strong></td><td><strong>关键事件</strong></td></tr><tr class="even"><td>第777话</td><td>首次道明面具的作用——伪装。除辟邪、兔爷、谬听外，几乎所有人看四不像都是白色的四不相</td></tr><tr class="odd"><td>第800话</td><td>天禄在镜子中看到黄色的四不像，证明观众是“天庭视角”。天禄逃走并开始思考一切</td></tr><tr class="even"><td>第900话</td><td>四不像摘下面具，向天禄坦白一切。贬貅心锁破除，鹿人店现代篇结束。天禄拒绝“皮皮”这个名字</td></tr><tr class="odd"><td>第1000话</td><td>天禄找到辟邪，兄弟正式相认。混沌与帝江的光将两兄弟带到了一起，四兽以另一种方式团聚</td></tr><tr class="even"><td>1000话后</td><td>第三只贬貅“七十七”登场。天禄与四不像隐藏辟邪，将辟邪变粉变小后让荔枝与壮壮收养</td></tr><tr class="odd"><td>1100话+</td><td>四不像上天庭更换骨血、孟极潜入天庭、水麒麟登场、各神兽日常与主线交织推进</td></tr></tbody></table><p><strong>关键判断：</strong>故事已进入“收线阶段”。主线从“揭示真相”转向“对抗天庭/解决历史遗留问题”。但根据作者直播，天禄他们“不可能反攻天庭”，后续将更偏向“智斗”而非“武斗”。</p><p><strong>四、核心未解之谜与伏笔梳理</strong></p><p><strong>4.1 四不相之死的真相</strong></p><p><strong>这是全作最核心的悬念，所有悲剧的起点。</strong></p><p><strong>已知线索</strong></p><ol type="1"><li><p>第200话：辟邪眼睛发红，攻击天禄。天禄喊“辟邪你清醒点！快把四不……”（话未说完，暗示四不相已出事）</p></li><li><p>第400话：天尊以“贬貅虐杀四不相”罪名制裁天禄，天禄怒骂天尊设计害自己和哥哥</p></li><li><p>第900话：确认四不相已死，但死因未明</p></li><li><p>萌娘百科：四周年直播色卡绘画稿暗示其已故，作者将四不相划到了“已不在”的一侧</p></li></ol><p><strong>两种主流推测</strong></p><table><tbody><tr class="odd"><td><strong>推测方向</strong></td><td><strong>具体内容</strong></td></tr><tr class="even"><td>辟邪失控说</td><td>辟邪因长期食用恶灵导致精神失控，误杀四不相。与心锁事件中辟邪“发疑”的描写吻合，解释了辟邪在现代篇的记忆缺陷</td></tr><tr class="odd"><td>天庭阴谋说</td><td>天庭设计陷害，操控或利用辟邪发疑，嫁祸贬貅一族，目的是清除不受控制的神兽并建立“四不像”制度</td></tr></tbody></table><p><strong>综合判断：</strong>靴下猫腰子很可能采用“两者兼有”的处理方式——辟邪确实失控了，但失控的根源是天庭的暗中操纵。这样既保留了辟邪的悲剧性，又不让天庭的阴谋线落空，同时为辟邪的救赎弧线提供空间。</p><p><strong>4.2 七十七的真实身份与使命</strong></p><p>七十七是第1000话后登场的第三只贬貅，是当前最重要的新角色。</p><p><strong>关键线索</strong></p><ul><li><p>七十七是黑色的，与天禄（蓝）、辟邪（红）不同，是目前登场角色中年龄最小的一只</p></li><li><p>只吃云露，不沾荤腥，能腾云驾雾、口吐云雾——这些都是麒麟的特征</p></li><li><p>作者直播明确表示：“七十七和四不相是有关系的”</p></li><li><p>天庭称七十七是“综合表现最良好的一只”，说明实验体不止一只，且有完善的计划</p></li><li><p>四不像曾产生过“让七十七死掉后拿辟邪代替”的想法，但随即意识到这与天庭的做法一样</p></li></ul><p><strong>推测：</strong>七十七很可能是天庭用四不相的残余骨血制造的“备用心锁”或“控制天禄的工具”。天庭在四不像脱离控制后，需要一个替代方案。七十七体内可能残留着四不相的意识碎片，这使得她既是天庭的棋子，也是连接四不相灵魂的关键线索。</p><p><strong>4.3 天庭的终极目的</strong></p><p>天庭的所作所为远不止“管理神兽”这么简单：</p><ul><li><p>用麒麟骨血制造四不像，维持“麒麟在世”的假象</p></li><li><p>删除神兽记忆，压制神兽力量</p></li><li><p>百年更换一次四不像，实现“长生不老”的伪装</p></li><li><p>派青鸟监视、派花大夫潜伏鹿人店</p></li><li><p>制造七十七等实验体，建立神兽控制体系</p></li></ul><p><strong>推测：</strong>天庭的终极目标是以“秩序”之名实现对所有神兽的绝对控制。四不相作为上古最强神兽之一，其存在本身就是对天庭权威的挑战。</p><p><strong>4.4 混沌与帝江的命运</strong></p><p>这是全作最具情感分量的伏笔。作者直播表示“混沌和帝江以后还会画点以前的故事”。</p><p><strong>推测：</strong>大结局时，混沌和帝江的故事线必然会被重新激活。天禄和辟邪最终回到彩云山脉，与混沌重逢。帝江的光芒在某种条件下重新绽放——不是“复活”，而是一种精神层面的重逢。</p><p><strong>4.5 四不像的最终命运</strong></p><p>四不像面临着身份认同的根本危机。麒麟骨血百年一换，不换就会死。作者直播明确表示“四不相不会复活”，但“漫画完结时四不相会露脸”。</p><p><strong>4.6 其他值得关注的伏笔</strong></p><table><tbody><tr class="odd"><td><strong>伏笔</strong></td><td><strong>说明</strong></td></tr><tr class="even"><td>玉麒麟</td><td>四不相的母亲，去向成谜。作者被问及时只说“你猜”</td></tr><tr class="odd"><td>皮皮与烛龙</td><td>作者表示“不会和解”，甚至可能在现代来报仇（还在构思）</td></tr><tr class="even"><td>巴赫的记忆</td><td>作者确认会恢复记忆，但“没那么快”</td></tr><tr class="odd"><td>四不相的眼睛</td><td>作者表示完结时会露脸，但眼睛颜色“还没想好”</td></tr></tbody></table><p><strong>五、作者8周年直播关键信息</strong></p><p>2025年10月15日，靴下猫腰子举办了《有兽焉》8周年直播，透露了大量关键信息。以下为精选内容：</p><p><strong>5.1 对后续剧情最具影响力的信息</strong></p><table><tbody><tr class="odd"><td><strong>直播内容</strong></td><td><strong>影响等级</strong></td></tr><tr class="even"><td>“有兽焉画个2000话应该是可以的”</td><td>★★★★★</td></tr><tr class="odd"><td>“天禄他们不可能反攻天庭的（打不过）”</td><td>★★★★★</td></tr><tr class="even"><td>“四不相不会复活的”</td><td>★★★★★</td></tr><tr class="odd"><td>“七十七和四不相是有关系的”</td><td>★★★★★</td></tr><tr class="even"><td>“混沌和帝江以后还会画点以前的故事”</td><td>★★★★</td></tr><tr class="odd"><td>“四不相后续还有很多剧情”</td><td>★★★★★</td></tr><tr class="even"><td>“画完三只贬貅剧情后很快出新角色”</td><td>★★★★</td></tr><tr class="odd"><td>“漫画完结时四不相会露脸”</td><td>★★★★★</td></tr><tr class="even"><td>“皮皮和烛龙不会和解，或许可能来报仇”</td><td>★★★</td></tr><tr class="odd"><td>“巴赫以后会恢复记忆，但没那么快”</td><td>★★★</td></tr><tr class="even"><td>“玉麒麟到底去哪了？——你猜”</td><td>★★★★</td></tr></tbody></table><p><strong>5.2 关键信息解读</strong></p><p><strong>① 故事进度：</strong>2000话的计划意味着当前仅完成了约60%，后续还有约800话的空间。我们现在看到的只是“半场戏”。</p><p><strong>② 对抗方式：</strong>“打不过”彻底改变了后续发展方向。不是武力正面冲击，而是通过智斗、谈判、利用规则漏洞来争取自由。</p><p><strong>③ 四不相的结局：</strong>“不会复活”但“完结时会露脸”——四不相不会“复活”，但可能以回忆、意识碎片或某种精神形态“露脸”。</p><p><strong>六、后续写作方向预测</strong></p><p><strong>6.1 方向一：近古篇补完与四不相之死揭晓</strong></p><p><strong>概率：极高（95%+）</strong></p><p><strong>可能的发展路径：</strong></p><ol start="5" type="1"><li><p>通过七十七的视角或入梦的方式补完近古篇剧情</p></li><li><p>揭示辟邪失控的完整经过及天庭的角色</p></li><li><p>揭示天庭制造四不像的完整过程及四不相的最后时刻</p></li></ol><p><strong>6.2 方向二：七十七与四不相灵魂线</strong></p><p><strong>概率：高（85%+）</strong></p><p><strong>可能的发展路径：</strong></p><ol start="8" type="1"><li><p>七十七与天禄、辟邪建立更深的联系</p></li><li><p>通过某种方式揭示四不相之死的完整真相</p></li><li><p>四不相的残魂通过七十七或四不像与贬貅兄弟做最后的告别</p></li></ol><p><strong>6.3 方向三：天庭博弈与神兽解放线</strong></p><p><strong>概率：高（80%+）。但不是武力对抗，而是智斗。</strong></p><p><strong>可能的发展路径：</strong></p><ol start="11" type="1"><li><p>天禄和四不像利用天庭规则的漏洞，争取神兽的自由</p></li><li><p>四不像制度被废除，四不像（鹿精）以自己的身份获得真正自由</p></li><li><p>天庭不会被彻底打倒，但被迫改变规则</p></li></ol><p><strong>6.4 方向四：混沌/帝江重逢线</strong></p><p><strong>概率：中高（70%+）。作者确认会再画他们的故事。</strong></p><p><strong>6.5 方向五：新角色与支线拓展</strong></p><p><strong>概率：中（50%+）。作者表示画完三只贬貅剧情后会出新角色。</strong></p><ul><li><p>睦眷——作者确认“没有被遗忘，最近就会登场”</p></li><li><p>小山雀和初狗——作者表示“最近会登场”</p></li><li><p>吗将、花椒——作者确认在1100-1200话内会再次登场</p></li></ul><p><strong>七、大结局深度预测</strong></p><p><strong>7.1 结局基调判断</strong></p><ul><li><p>叙事美学：“建立在悲剧上的喜剧”——结局不可能是纯粹圆满，也不可能是彻底悲剧</p></li><li><p>作者定调：四不相不会复活、不会反攻天庭——排除了“武力推翻”和“全员复活”的可能</p></li><li><p>作者偏好：“虽然读者说不喜欢刀子，但其实看着好像挺喜欢刀的”——结局一定会有刀</p></li><li><p>角色弧线：每个角色都需要完成自己的成长与和解</p></li></ul><p><strong>最可能的结局基调：“悲欣交集”式的和解结局</strong></p><p><strong>7.2 结局场景预演</strong></p><p><strong>场景一：四不相之死的真相大白</strong></p><p>辟邪确实在失控状态下伤害了四不相，但根源在于天庭的暗中操纵。天禄得知真相后，选择原谅哥哥——“不是你的错”。这将成为全作最具泪点的场景之一。</p><p><strong>场景二：四不像的牺牲与救赎</strong></p><p>四不像在最终关键时刻选择摧毁麒麟面具，彻底终结四不像制度。这可能导致他失去麒麟骨血赋予的力量，回归普通鹿精。但他终于可以以“自己”的身份活着。</p><p><strong>最刀的可能：</strong><em>四不像在摧毁面具后消散，四不相的残魂与他融为一体，得到安息。这既是死亡，也是重逢。</em></p><p><strong>场景三：混沌与帝江的精神重逢</strong></p><p>天禄和辟邪回到彩云山脉，与混沌重逢。帝江的光芒短暂绽放——不是复活，而是一种“告别”。混沌终于可以放下执念。</p><blockquote><p><em>“再见了我们的朋友，祝你梦中有花，梦中有她。”</em></p></blockquote><p><em>这句话将在此刻完成回响。</em></p><p><strong>场景四：七十七找到归属</strong></p><p>七十七作为天庭的造物，最终选择站在自由的一边。她可能成为新的“纽带”，或者留在鹿人店，成为天禄和辟邪的“妹妹”。</p><p><strong>场景五：鹿人店的日常延续</strong></p><p>大结局后，鹿人店将继续经营，但不再需要隐藏。神兽们可以自由地生活在人间。最后的画面可能是：鹿人店里，天禄、辟邪、兔爷、金角银角……大家围坐在一起，过着平凡而温暖的日子。</p><p><em>画面一转，彩云山脉上，一朵花静静地开了。</em></p><p><strong>7.3 结局的情感基调</strong></p><blockquote><p><em>“所有的离别都是为了重逢，所有的伤痕都长出了花。”</em></p></blockquote><p>这不是一个大团圆结局，因为四不相回不来了，帝江也回不来了，上古的岁月再也回不去了。但这是一个和解的结局——与过去和解，与自己和解，与这个不完美的世界和解。</p><p><strong>八、风险与不确定性</strong></p><table><tbody><tr class="odd"><td><strong>因素</strong></td><td><strong>影响</strong></td><td><strong>不确定等级</strong></td></tr><tr class="even"><td>近古篇尚未完结</td><td>四不相之死的真相可能出乎意料</td><td>高</td></tr><tr class="odd"><td>七十七角色走向</td><td>可能引入全新剧情线</td><td>中高</td></tr><tr class="even"><td>天庭深层设定</td><td>天尊、天道等高层力量规则尚未揭示</td><td>中</td></tr><tr class="odd"><td>作者创作意图</td><td>可能有意打破读者预期</td><td>中</td></tr><tr class="even"><td>2000话计划</td><td>充足空间意味着可能出现意外转折</td><td>低中</td></tr></tbody></table><p><strong>九、总结</strong></p><p><strong>9.1 核心结论</strong></p><ul><li><p>《有兽焉》当前仅完成了约60%的故事，后续还有约800话的充裕空间。我们现在看到的只是“半场戏”。</p></li><li><p>后续写作将围绕“真相揭示→智斗博弈→和解告别”的三段式结构展开，而非武力推翻。</p></li><li><p>大结局最可能是一种“悲欣交集”的温暖——不是所有失去的都能找回，但所有活着的都能继续前行。</p></li><li><p>四不相将在漫画完结时“露脸”，这将是全作最具情感冲击力的场景。</p></li></ul><p><strong>9.2 作品的文学价值</strong></p><p>《有兽焉》的伟大之处在于：它用《山海经》的神兽传说为外壳，包裹着一个关于自由、牺牲、身份认同与家庭羁绊的深刻故事。它让我们看到：真正的勇气不是打败敌人，而是在失去之后依然选择善良；真正的自由不是无所不能，而是在算计与牢笼之中找到活下去的空间。</p><p>正如帝江教会我们的：</p><blockquote><p><em>“善良不是软弱，放手不是放弃，而是一种更勇敢的爱。”</em></p></blockquote><p><strong>附录：参考来源</strong></p><ul><li><p>福瑞百科 - 《有兽焉》条目：https://furrywiki.org.cn/wiki/有兽焉</p></li><li><p>哔哩哔哩专栏 - 《有兽焉》主线剧情梳理：https://www.bilibili.com/read/cv13167300/</p></li><li><p>哔哩哔哩专栏 - 《建立在悲剧上的喜剧》剧情解析：https://www.bilibili.com/read/mobile?id=39208288</p></li><li><p>哔哩哔哩专栏 - 《人间有神兽 来自九重天》作品评价：https://www.bilibili.com/read/cv43844063/</p></li><li><p>萌娘百科 - 四不相条目：https://moegirl.uk/四不相(有兽焉)</p></li><li><p>腾讯频道 - 《有兽焉》8周年直播总结：https://pd.qq.com/g/pd62090645/</p></li><li><p>哔哩哔哩漫画 - 《有兽焉》正版：https://manga.bilibili.com/detail/mc29329</p></li><li><p>中国网络视听节目服务协会 - 《有兽焉》第五季报道</p></li></ul>
             </div>
-
-            <div id="receivingArea" class="hidden">
-                <div class="file-info" id="receiveFileInfo"></div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="receiveProgress" style="width: 0%"></div>
-                </div>
-                <div class="status info" id="receiveStatus">正在接收...</div>
-                <div style="margin-top: 10px; color: #666; font-size: 0.9em;">
-                    速度: <span id="receiveSpeed">0 B/s</span>
-                </div>
-            </div>
-
-            <button class="back-btn" onclick="goBack()">← 返回主界面</button>
         </div>
-    </div>
+    </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="app.js"></script>
-    
-    <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100;">
-        <a href="https://qm.qq.com/q/BekqLZayn6" target="_blank" style="
-            display: inline-block;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 500;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-        " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.5)';" 
-        onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';">
-            💬 EOTrans交流群 1061614618
-        </a>
-    </div>
-    
-    <div style="position: fixed; bottom: 5px; left: 50%; transform: translateX(-50%); z-index: 99; font-size: 11px; color: rgba(128, 128, 128, 0.6);">
-        MCZLF Studio _ Loft Games
-    </div>
+    <!-- CP全攻略与名场面索引 -->
+    <section id="cp" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>CP全攻略与名场面索引</h2>
+                <p class="section-subtitle">基于有兽档案馆 + 萌娘百科的深度整理（深度版）</p>
+            </div>
+            <div class="card" id="cpContent">
+<p><strong>《有兽焉》CP全攻略与名场面话数索引</strong></p><p>（深度版）</p><p>基于有兽档案馆 + 萌娘百科的深度整理</p><p>2026年4月</p><p><strong>目录概览</strong></p><p>本文档涵盖《有兽焉》全系列主要CP关系。</p><table><tbody><tr class="odd"><td><strong>章节</strong></td><td><strong>CP名称</strong></td><td><strong>关系定位</strong></td><td><strong>场景数</strong></td></tr><tr class="even"><td>第一章</td><td><strong>天禄×辟邪</strong></td><td>兄弟/豏貉双黄蛋</td><td>35+</td></tr><tr class="odd"><td>第二章</td><td><strong>辟邪×四不相</strong></td><td>小梅花</td><td>18+</td></tr><tr class="even"><td>第三章</td><td><strong>帝江×混沌</strong></td><td>一家四口最虐CP</td><td>15+</td></tr><tr class="odd"><td>第四章</td><td><strong>四不像×兔爷</strong></td><td>官方盖章CP</td><td>14+</td></tr><tr class="even"><td>第五章</td><td><strong>天禄×四不像</strong></td><td>同居日常/皮皮与四老板</td><td>25+</td></tr><tr class="odd"><td>第六章</td><td><strong>天禄×吐宝鼠</strong></td><td>守护与伴侣</td><td>12+</td></tr><tr class="even"><td>第七章</td><td><strong>辟邪×花椒</strong></td><td>知音</td><td>12+</td></tr><tr class="odd"><td>第八章</td><td><strong>荔枝×壮壮</strong></td><td>收养与家常</td><td>12+</td></tr><tr class="even"><td>第九章</td><td><strong>核桃×福仔</strong></td><td>梦境与现实</td><td>12+</td></tr><tr class="odd"><td>第十章</td><td><strong>小山雀×初狗</strong></td><td>忠诚与守护</td><td>12+</td></tr><tr class="even"><td>第十一章</td><td><strong>盘湖×猫猫泪</strong></td><td>温情与治愈</td><td>12+</td></tr><tr class="odd"><td>第十二章</td><td><strong>巴陵君×巴赫</strong></td><td>店员日常</td><td>12+</td></tr><tr class="even"><td>第十三章</td><td><strong>其他CP与互动</strong></td><td>群像拓展</td><td>30+</td></tr></tbody></table><p><strong>第一章：天禄×辟邪（兄弟/貔貅双黄蛋）</strong></p><p>天禄与辟邪是《有兽焉》中最核心的CP，同为貔貅双黄蛋所化。辟邪比天禄早出壳几秒，从此开启为弟弟找食物、护弟弟周全的人生。现代篇中天禄失忆，辟邪强忍心痛说出“我们来做......朋友吧”，被读者誉为全作最虐名场面。</p><p><strong>名场面索引</strong></p><table><tbody><tr class="odd"><td><strong>话数</strong></td><td><strong>场景描述</strong></td><td><strong>CP指数</strong></td><td><strong>篇章标签</strong></td></tr><tr class="even"><td>第140话</td><td>天地造出双黄蛋，辟邪比天禄早出壳几秒。</td><td><strong>★★★★★</strong></td><td><strong>上古篇</strong></td></tr><tr class="odd"><td>第150话</td><td>辟邪发现恶灵好吃，开始为弟弟天禄寻找食物。</td><td><strong>★★★★☆</strong></td><td><strong>上古篇</strong></td></tr><tr class="even"><td>第182话</td><td>天禄遇见帝江，辟邪初见帝江抱有敌意。</td><td><strong>★★★★☆</strong></td><td><strong>上古篇</strong></td></tr><tr class="odd"><td>第191话</td><td>帝江被混沌的叫声吸引。</td><td><strong>★★★☆☆</strong></td><td><strong>上古篇</strong></td></tr><tr class="even"><td>第191-192话</td><td>帝江与混沌通过触摸交流，驮混沌回家。一家四口成型。</td><td><strong>★★★★★</strong></td><td><strong>上古篇</strong></td></tr><tr class="odd"><td>第202-203话</td><td>一家四口打山洞装修，天禄画一家四口画像。</td><td><strong>★★★★★</strong></td><td><strong>上古篇</strong></td></tr><tr class="even"><td>第207-208话</td><td>三小凶偷粮，混沌揍梼杌穷奇。</td><td><strong>★★★★☆</strong></td><td><strong>上古篇</strong></td></tr><tr class="odd"><td>第222话</td><td>辟邪逮到三足金乌金十，晒饱帝江。</td><td><strong>★★★☆☆</strong></td><td><strong>上古篇</strong></td></tr><tr class="even"><td>第251话</td><td>混沌的嗅觉描述：辟邪像小红柿，天禄像小绿花菜。</td><td><strong>★★★☆☆</strong></td><td><strong>上古篇</strong></td></tr><tr class="odd"><td>第259-260话</td><td>帝江偷偷放走金十。</td><td><strong>★★★☆☆</strong></td><td><strong>上古篇</strong></td></tr><tr class="even"><td>第261-262话</td><td>帝江石化，混沌飞天被灼伤，上古篇结束。</td><td><strong>★★★★★</strong></td><td><strong>上古篇</strong></td></tr><tr class="odd"><td>第284话</td><td>貔貅兄弟醒来，辟邪种下长春树种子。</td><td><strong>★★★★☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第300-303话</td><td>辟邪跌落悬崖被四不相救起。兄弟被迫分离。</td><td><strong>★★★★★</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第304话</td><td>天禄被始玉麒麟用金块诱回。</td><td><strong>★★★☆☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第318-319话</td><td>貔貅兄弟重逢。感人至深。</td><td><strong>★★★★★</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第345话</td><td>貔貅兄弟在四不相家住了一段时间。</td><td><strong>★★★☆☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第368话</td><td>貔貅兄弟在四不相家的日常生活延续。</td><td><strong>★★★☆☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第369话</td><td>四不相与貔貅兄弟一起出走。</td><td><strong>★★★★☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第414话</td><td>四不相直言帝江已死。</td><td><strong>★★★★☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第437-438话</td><td>海边捕鲲。兄弟联手合作。</td><td><strong>★★★★☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第454-455话</td><td>天禄被卡树上，四不相舔天禄治疗，辟邪吃醋名场面。</td><td><strong>★★★★★</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第457-458话</td><td>貔貅兄弟长成第三形态。</td><td><strong>★★★★☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第459话</td><td>貔貅兄弟学飞行。</td><td><strong>★★★☆☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第523-524话</td><td>沙漠遇险。兄弟在绝境中互相依靠。</td><td><strong>★★★★☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第541-542话</td><td>红枫林遇见战虎。</td><td><strong>★★★☆☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第585话</td><td>三只兽回到四不相家中。</td><td><strong>★★★☆☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第586话</td><td>混沌一行回到帝江处。</td><td><strong>★★★★☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第599-600话</td><td>混沌化作彩云山脉，与帝江的光融为一体。</td><td><strong>★★★★★</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第601话</td><td>中古篇完结，辟邪暴走变大吓跑三小凶。</td><td><strong>★★★★★</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第2话</td><td>辟邪存在的暗示（雕像）。</td><td><strong>★★☆☆☆</strong></td><td><strong>暗示存在</strong></td></tr><tr class="even"><td>第10话</td><td>辟邪存在的进一步暗示。</td><td><strong>★★☆☆☆</strong></td><td><strong>暗示存在</strong></td></tr><tr class="odd"><td>第12话</td><td>八斤询问天禄哥哥去向。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第36话</td><td>饕餮提到“兄弟”。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第38话</td><td>天禄肚子里的神秘黑影。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第84话</td><td>国王游戏中众角色提到天禄哥哥。</td><td><strong>★★☆☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第97话</td><td>天禄肚子金币堆中藏着辟邪两角（首次露角）。</td><td><strong>★★★★★</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第100话</td><td>辟邪正式登场。</td><td><strong>★★★★★</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第343话</td><td>辟邪只跟天禄见一次面，玩镜子游戏。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第366话</td><td>天禄被冰雹砸中恢复记忆但很快被砸回去。</td><td><strong>★★★★★</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第499-502话</td><td>辟邪发现天禄失忆发飙大怒，对天禄说“我们来做......朋友吧”（最虐名场面）。</td><td><strong>★★★★★</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第507-508话</td><td>辟邪与天禄深山见面，开始尝试恢复天禄记忆。</td><td><strong>★★★★★</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第513-514话</td><td>“三兽行”酒吧偶遇，“皮皮”绰号由来。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第800话</td><td>魔镜法宝中四不像显露鹿的样貌。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第899话</td><td>貔貅心锁相关。</td><td><strong>★★★★☆</strong></td><td><strong>心锁事件</strong></td></tr><tr class="even"><td>第901话</td><td>天禄恢复记忆后表示皮皮从来不是他的名字。</td><td><strong>★★★★★</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第995话</td><td>咯吱窝毛滑行首次出现。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第998话</td><td>咯吱窝毛滑行再次出现。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第1171话</td><td>最新出现。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第200话</td><td>辟邪发疯攻击天禄的梦境闪回。</td><td><strong>★★★★★</strong></td><td><strong>心锁事件</strong></td></tr><tr class="odd"><td>第400话</td><td>四不像发现自己是封印天禄记忆的心锁。</td><td><strong>★★★★★</strong></td><td><strong>心锁事件</strong></td></tr><tr class="even"><td>第401话</td><td>“原来我......是假的啊”。全作最心碎的台词之一。</td><td><strong>★★★★★</strong></td><td><strong>心锁事件</strong></td></tr><tr class="odd"><td>第16话</td><td>天禄狗窝照片（疑似辟邪）。</td><td><strong>★★☆☆☆</strong></td><td><strong>暗示存在</strong></td></tr><tr class="even"><td>第570话</td><td>辟邪肚子里“白茫茫大地真干净”。</td><td><strong>★★★★☆</strong></td><td><strong>暗示存在</strong></td></tr><tr class="odd"><td>第575话</td><td>辟邪耳朵里的类似情况。</td><td><strong>★★★☆☆</strong></td><td><strong>暗示存在</strong></td></tr></tbody></table><p><strong>CP分析点评</strong></p><p>第499-502话的“我们来做......朋友吧”被读者誉为全作最虐名场面。心锁事件将兄弟关系与四不像的命运紧密编织在一起。</p><p><strong>第二章：辟邪×四不相（小梅花）</strong></p><p>辟邪与四不相是《有兽焉》中最微妙的感情线之一。四不相救起辟邪，给他取名“小梅花”。四周年直播中作者暗示四不相已故。</p><p><strong>名场面索引</strong></p><table><tbody><tr class="odd"><td><strong>话数</strong></td><td><strong>场景描述</strong></td><td><strong>CP指数</strong></td><td><strong>篇章标签</strong></td></tr><tr class="even"><td>第300话</td><td>四不相救起辟邪，起名“小梅花”。</td><td><strong>★★★★★</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第300-303话</td><td>四不相要求辟邪陪他500年。</td><td><strong>★★★★★</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第345话</td><td>貔貅兄弟在四不相家。</td><td><strong>★★★★☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第368话</td><td>辟邪与四不相日常。</td><td><strong>★★★☆☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第369话</td><td>四不相与貔貅兄弟一起出走。</td><td><strong>★★★★☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第414话</td><td>四不相直言帝江已死。</td><td><strong>★★★☆☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第437-438话</td><td>海边捕鲲配合。</td><td><strong>★★★☆☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第454-455话</td><td>四不相舔天禄治疗，辟邪吃醋。</td><td><strong>★★★★★</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第457-458话</td><td>貔貅兄弟长成第三形态。</td><td><strong>★★★☆☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第523-524话</td><td>沙漠遇险互助。</td><td><strong>★★★★☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第541-542话</td><td>红枫林互动。</td><td><strong>★★★☆☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第585话</td><td>三只兽回到四不相家。</td><td><strong>★★★☆☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第601话</td><td>辟邪暴走后四不相舔舐伤口。</td><td><strong>★★★★★</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>有兽戏话第27幕</td><td>四不相被天禄扮演的辟邪搞得怦然心动（“取向狙击”）。</td><td><strong>★★★★★</strong></td><td><strong>番外</strong></td></tr><tr class="even"><td>作者lofter番外</td><td>辟邪和四不相小番外。</td><td><strong>★★★★☆</strong></td><td><strong>番外</strong></td></tr><tr class="odd"><td>四周年直播1:00:26</td><td>作者暗示四不相已故。</td><td><strong>★★★★★</strong></td><td><strong>番外</strong></td></tr><tr class="even"><td>第400话</td><td>四不像发现自己是心锁。</td><td><strong>★★★★★</strong></td><td><strong>心锁事件</strong></td></tr><tr class="odd"><td>第401话</td><td>“原来我......是假的啊”。</td><td><strong>★★★★★</strong></td><td><strong>心锁事件</strong></td></tr></tbody></table><p><strong>CP分析点评</strong></p><p>辟邪与四不相的关系是一场无望的守候。四周年直播中作者暗示四不相已故，让这段关系永远定格为“遗憾”。</p><p><strong>第三章：帝江×混沌（一家四口最虐CP）</strong></p><p>帝江与混沌的爱情是《有兽焉》中最悲壮的故事线。混沌最终化作彩云山脉与帝江的光融为一体。</p><p><strong>名场面索引</strong></p><table><tbody><tr class="odd"><td><strong>话数</strong></td><td><strong>场景描述</strong></td><td><strong>CP指数</strong></td><td><strong>篇章标签</strong></td></tr><tr class="even"><td>第182话</td><td>帝江出场。</td><td><strong>★★★★☆</strong></td><td><strong>上古篇</strong></td></tr><tr class="odd"><td>第191话</td><td>帝江被混沌的叫声吸引。</td><td><strong>★★★★★</strong></td><td><strong>上古篇</strong></td></tr><tr class="even"><td>第191-192话</td><td>帝江与混沌通过触摸交流。</td><td><strong>★★★★★</strong></td><td><strong>上古篇</strong></td></tr><tr class="odd"><td>第202-203话</td><td>一家四口打山洞装修。</td><td><strong>★★★★★</strong></td><td><strong>上古篇</strong></td></tr><tr class="even"><td>第222话</td><td>辟邪逮到金十晒饱帝江。</td><td><strong>★★★☆☆</strong></td><td><strong>上古篇</strong></td></tr><tr class="odd"><td>第251话</td><td>混沌的嗅觉描述。</td><td><strong>★★★☆☆</strong></td><td><strong>上古篇</strong></td></tr><tr class="even"><td>第259-260话</td><td>帝江偷偷放走金十。</td><td><strong>★★★☆☆</strong></td><td><strong>上古篇</strong></td></tr><tr class="odd"><td>第261-262话</td><td>帝江石化，混沌感知“帝江的味道消失了”。</td><td><strong>★★★★★</strong></td><td><strong>上古篇</strong></td></tr><tr class="even"><td>第563话</td><td>混沌的蛋从云上掉下。</td><td><strong>★★★☆☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第564话</td><td>混沌天生反杀力量。</td><td><strong>★★★★☆</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第586话</td><td>混沌一行回到帝江处。</td><td><strong>★★★★★</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第589话</td><td>混沌被压冰盖几万年。</td><td><strong>★★★★★</strong></td><td><strong>中古篇</strong></td></tr><tr class="even"><td>第599-600话</td><td>混沌化为彩云山脉。</td><td><strong>★★★★★</strong></td><td><strong>中古篇</strong></td></tr><tr class="odd"><td>第191话</td><td>帝江第一次触摸混沌。</td><td><strong>★★★★★</strong></td><td><strong>上古篇</strong></td></tr><tr class="even"><td>第262话</td><td>上古篇结束。</td><td><strong>★★★★★</strong></td><td><strong>上古篇</strong></td></tr></tbody></table><p><strong>CP分析点评</strong></p><p>帝江与混沌的爱情是《有兽焉》中最纯粹的情感叙事。“帝江的味道消失了”的力量远超任何情话。</p><p><strong>第四章：四不像×兔爷（官方盖章CP）</strong></p><p>四不像与兔爷是唯一被官方盖章的CP。萌娘百科标注兔爷为四不像的“爱人”。</p><p><strong>名场面索引</strong></p><table><tbody><tr class="odd"><td><strong>话数</strong></td><td><strong>场景描述</strong></td><td><strong>CP指数</strong></td><td><strong>篇章标签</strong></td></tr><tr class="even"><td>萌娘百科</td><td>兔爷为四不像的“爱人”。</td><td><strong>★★★★★</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>专属称呼</td><td>兔爷称呼四不像“四四”。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>第2话</td><td>兔爷首次出现。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第45话</td><td>斗篷和围巾私奔（法宝CP）。</td><td><strong>★★★★★</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第123话</td><td>兔爷来到鹿人店。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第223话</td><td>兔爷和四不像看电影。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第275话</td><td>四不像与兔爷互动。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第399话</td><td>心锁事件前奏。</td><td><strong>★★★☆☆</strong></td><td><strong>心锁事件</strong></td></tr><tr class="even"><td>第400话</td><td>四不像发现真相。</td><td><strong>★★★★☆</strong></td><td><strong>心锁事件</strong></td></tr><tr class="odd"><td>第490话</td><td>四不像与兔爷。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第513-514话</td><td>三兽行酒吧。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第800话</td><td>魔镜中显露鹿形。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第831话</td><td>四不像与兔爷。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第1170话</td><td>兔爷最新出现。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr></tbody></table><p><strong>CP分析点评</strong></p><p>四不像与兔爷是《有兽焉》中最稳定的CP。</p><p><strong>第五章：天禄×四不像（同居日常/皮皮与四老板）</strong></p><p>天禄与四不像同居于鹿人店。四不像称天禄“皮皮”，天禄一直以为四不像是麒麟。</p><p><strong>名场面索引</strong></p><table><tbody><tr class="odd"><td><strong>话数</strong></td><td><strong>场景描述</strong></td><td><strong>CP指数</strong></td><td><strong>篇章标签</strong></td></tr><tr class="even"><td>第1话</td><td>两人首次同时出场。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第3话</td><td>小剧场。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第5话</td><td>天禄第一次变大。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第9话</td><td>天禄略大于四不像鹿精原形。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第11话</td><td>四不像首次发动“清醒之蹄”。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第13话</td><td>咯吱窝毛滑行首次出现。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第15话</td><td>摸天禄手法。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第17话</td><td>四不像托付皮皮看家。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第60话</td><td>四不像面具被战虎咬碎。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第121话</td><td>四不像角色原型。</td><td><strong>★★☆☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第143话</td><td>天禄看到始麒麟蹄印联想到四不像。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第235话</td><td>四不像面具被涂花纹。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第264话</td><td>天禄任性消耗神力变回幼年形态。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第275话</td><td>四不像日常。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第353话</td><td>天禄自下凡到鹿人店经过。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第437话</td><td>证实四不像能力跟四不相有关。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第490话</td><td>四不像日常。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第498话</td><td>核桃进入天禄梦境“铁笼梦”。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第499-502话</td><td>辟邪发飙攻击四不像。</td><td><strong>★★★★★</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第514话</td><td>醉酒四不像自称“老子是麒麟”。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第553话</td><td>核桃梦境中疑似困兽岛。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第726话</td><td>黑云山事件天禄大于山头。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第777话</td><td>面具作用首次道明。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第800话</td><td>魔镜法宝。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>第801话</td><td>确认天禄眼中四不像一直是麒麟。</td><td><strong>★★★★★</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>第899话</td><td>貔貅心锁。</td><td><strong>★★★★☆</strong></td><td><strong>心锁事件</strong></td></tr><tr class="even"><td>第1171话</td><td>最新出现。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr></tbody></table><p><strong>CP分析点评</strong></p><p>第801话确认天禄眼中四不像一直是麒麟，让关系从简单的“同居伙伴”上升到了更复杂的层面。</p><p><strong>第六章：天禄×吐宝鼠（守护与伴侣）</strong></p><p>吐宝鼠是天禄在现代篇中重要的伙伴。默默守护天禄。</p><p><strong>名场面索引</strong></p><table><tbody><tr class="odd"><td><strong>话数</strong></td><td><strong>场景描述</strong></td><td><strong>CP指数</strong></td><td><strong>篇章标签</strong></td></tr><tr class="even"><td>吐宝鼠准备食物</td><td>吐宝鼠为天禄准备食物和宝物。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>嬉戏场景</td><td>天禄与吐宝鼠的嬉戏场景。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>困难时援手</td><td>吐宝鼠在天禄遇到困难时伸出援手。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>鹿人店互动</td><td>吐宝鼠在鹿人店中与天禄的互动。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>失忆后的担忧</td><td>天禄失忆后吐宝鼠的反应。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>默默陪伴</td><td>天禄独自时吐宝鼠的默默陪伴。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>能力帮助</td><td>吐宝鼠用自身能力帮助天禄。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>面对辟邪</td><td>吐宝鼠面对辟邪时的反应。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>始终陪伴</td><td>吐宝鼠始终站在天禄身边。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>带来温暖</td><td>吐宝鼠给天禄带来的温暖。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>共同成长</td><td>吐宝鼠在与天禄的相处中成长。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>守护天禄</td><td>吐宝鼠守护天禄的场景。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr></tbody></table><p><strong>CP分析点评</strong></p><p>吐宝鼠的爱是简单而纯粹的——默默守护在天禄身边。</p><p><strong>第七章：辟邪×花椒（知音）</strong></p><p>辟邪为寻找四不相练习画作，花椒误将画当成上古遗迹，两人成为知音。</p><p><strong>名场面索引</strong></p><table><tbody><tr class="odd"><td><strong>话数</strong></td><td><strong>场景描述</strong></td><td><strong>CP指数</strong></td><td><strong>篇章标签</strong></td></tr><tr class="even"><td>画作缘起</td><td>辟邪为寻找四不相开始练习画作。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>花椒发现</td><td>花椒把辟邪的画当成上古遗迹。</td><td><strong>★★★★★</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>成为知音</td><td>辟邪与花椒因为画作成为知音。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>画作交流</td><td>辟邪向花椒展示更多画作。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>花椒热情</td><td>花椒对辟邪画作的热情。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>辟邪倾诉</td><td>辟邪向花椒倾诉心路历程。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>误会延续</td><td>花椒继续将辟邪的画当作上古遗迹。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>共同探索</td><td>辟邪与花椒一起探索画中线索。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>花椒支持</td><td>花椒支持辟邪继续寻找四不相。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>辟邪感激</td><td>辟邪对花椒成为知音的感激。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>画技进步</td><td>辟邪的画技在鼓励下不断进步。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>知音珍贵</td><td>辟邪与花椒之间的知音关系。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr></tbody></table><p><strong>CP分析点评</strong></p><p>这个美丽的误会成为了两人之间独特的纽带。</p><p><strong>第八章：荔枝×壮壮（收养与家常）</strong></p><p>荔枝和壮壮收养了被天禄打扮成流浪幼崽的辟邪。</p><p><strong>名场面索引</strong></p><table><tbody><tr class="odd"><td><strong>话数</strong></td><td><strong>场景描述</strong></td><td><strong>CP指数</strong></td><td><strong>篇章标签</strong></td></tr><tr class="even"><td>收养辟邪</td><td>荔枝和壮壮收养了辟邪。</td><td><strong>★★★★★</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>日常照顾</td><td>荔枝和壮壮照顾辟邪的日常生活。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>家庭氛围</td><td>为辟邪营造的家庭氛围。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>荔枝温柔</td><td>荔枝对辟邪的温柔照顾。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>壮壮担当</td><td>壮壮在家庭中的担当。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>三人互动</td><td>荔枝、壮壮和辟邪的三人互动。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>辟邪融入</td><td>辟邪逐渐融入家庭。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>默契配合</td><td>荔枝和壮壮之间的默契配合。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>家庭日常</td><td>充满人间烟火气的温馨场景。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>辟邪感激</td><td>辟邪对荔枝和壮壮的感激。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>家庭温暖</td><td>给辟邪带来的家庭温暖。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>两人爱情</td><td>荔枝和壮壮之间的爱情。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr></tbody></table><p><strong>CP分析点评</strong></p><p>收养辟邪的善举展现了两人善良的本性。</p><p><strong>第九章：核桃×福仔（梦境与现实）</strong></p><p>核桃拥有进入他人梦境的能力，与福仔的关系跨越梦境与现实。</p><p><strong>名场面索引</strong></p><table><tbody><tr class="odd"><td><strong>话数</strong></td><td><strong>场景描述</strong></td><td><strong>CP指数</strong></td><td><strong>篇章标签</strong></td></tr><tr class="even"><td>核桃铁笼梦</td><td>核桃进入天禄梦境“铁笼梦”。</td><td><strong>★★★★★</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>梦境能力</td><td>核桃的梦境能力介绍。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>初遇场景</td><td>核桃与福仔的第一次相遇。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>梦境探索</td><td>核桃与福仔一起探索梦境。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>现实互动</td><td>核桃与福仔在现实中的日常互动。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>梦境保护</td><td>核桃在梦境中保护福仔。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>福仔支持</td><td>福仔对核桃梦境能力的理解和支持。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>困兽岛</td><td>核桃梦境中疑似困兽岛。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>梦境穿梭</td><td>核桃与福仔在梦境与现实之间的穿梭。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>核桃成长</td><td>核桃在与福仔的相处中成长。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>福仔温暖</td><td>福仔给核桃带来的温暖。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>两人默契</td><td>核桃与福仔之间的默契。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr></tbody></table><p><strong>CP分析点评</strong></p><p>真正的爱能够跨越一切边界。</p><p><strong>第十章：小山雀×刍狗（忠诚与守护）</strong></p><p>小山雀的灵动与刍狗的沉稳形成互补。</p><p><strong>名场面索引</strong></p><table><tbody><tr class="odd"><td><strong>话数</strong></td><td><strong>场景描述</strong></td><td><strong>CP指数</strong></td><td><strong>篇章标签</strong></td></tr><tr class="even"><td>初遇场景</td><td>小山雀与刍狗的第一次相遇。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>性格互补</td><td>小山雀的灵动与刍狗的沉稳形成互补。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>刍狗守护</td><td>刍狗默默守护小山雀的场景。</td><td><strong>★★★★★</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>小山雀依赖</td><td>小山雀对刍狗的依赖。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>共同冒险</td><td>小山雀与刍狗一起经历冒险。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>危机时刻</td><td>刍狗在小山雀遇到危险时挺身而出。</td><td><strong>★★★★★</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>小山雀关心</td><td>小山雀对刍狗的关心。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>日常互动</td><td>小山雀与刍狗的日常互动。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>信任建立</td><td>小山雀与刍狗之间信任的建立。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>忠诚体现</td><td>刍狗对小山雀的忠诚。</td><td><strong>★★★★★</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>共同成长</td><td>小山雀与刍狗共同成长。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>温暖陪伴</td><td>小山雀与刍狗的温暖陪伴。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr></tbody></table><p><strong>CP分析点评</strong></p><p>真正的守护不需要言语，行动就是最好的证明。</p><p><strong>第十一章：盘湖×猫猫泪（温情与治愈）</strong></p><p>盘湖的沉稳与猫猫泪的柔软形成和谐搭配。</p><p><strong>名场面索引</strong></p><table><tbody><tr class="odd"><td><strong>话数</strong></td><td><strong>场景描述</strong></td><td><strong>CP指数</strong></td><td><strong>篇章标签</strong></td></tr><tr class="even"><td>初遇场景</td><td>盘湖与猫猫泪的第一次相遇。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>性格和谐</td><td>盘湖的沉稳与猫猫泪的柔软形成和谐搭配。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>治愈互动</td><td>盘湖与猫猫泪之间的治愈性互动。</td><td><strong>★★★★★</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>盘湖温柔</td><td>盘湖对猫猫泪的温柔对待。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>猫猫泪依赖</td><td>猫猫泪对盘湖的依赖。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>共同经历</td><td>盘湖与猫猫泪共同经历困难。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>温暖时刻</td><td>盘湖与猫猫泪之间的温暖时刻。</td><td><strong>★★★★★</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>日常相处</td><td>盘湖与猫猫泪的日常相处模式。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>互相治愈</td><td>盘湖与猫猫泪互相治愈的场景。</td><td><strong>★★★★★</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>盘湖保护</td><td>盘湖保护猫猫泪的场景。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>猫猫泪回报</td><td>猫猫泪用自己的方式回报盘湖的关爱。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>两人未来</td><td>盘湖与猫猫泪对未来的期待。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr></tbody></table><p><strong>CP分析点评</strong></p><p>找到一个能让自己安心的人，就是最大的幸福。</p><p><strong>第十二章：巴陵君×巴赫（店员日常）</strong></p><p>巴陵君与巴赫是鹿人店的员工CP。</p><p><strong>名场面索引</strong></p><table><tbody><tr class="odd"><td><strong>话数</strong></td><td><strong>场景描述</strong></td><td><strong>CP指数</strong></td><td><strong>篇章标签</strong></td></tr><tr class="even"><td>店员身份</td><td>巴陵君是鹿人店员工。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>工作配合</td><td>巴陵君与巴赫在鹿人店的工作配合。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>日常互动</td><td>巴陵君与巴赫的日常互动。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>巴陵君性格</td><td>巴陵君的性格特点展现。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>巴赫性格</td><td>巴赫的性格特点展现。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>工作冲突</td><td>巴陵君与巴赫在工作中的小冲突。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>互相帮助</td><td>巴陵君与巴赫在工作中互相帮助。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>鹿人店日常</td><td>巴陵君与巴赫在鹿人店的日常。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>巴陵君关心</td><td>巴陵君对巴赫的关心。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>巴赫回应</td><td>巴赫对巴陵君关心的回应。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>共同梦想</td><td>巴陵君与巴赫对鹿人店未来的共同期待。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>店员情谊</td><td>巴陵君与巴赫之间的店员情谊。</td><td><strong>★★★★☆</strong></td><td><strong>日常</strong></td></tr></tbody></table><p><strong>CP分析点评</strong></p><p>最好的爱情往往从最平凡的工作日常中萌芽。</p><p><strong>第十三章：其他CP与互动（群像拓展）</strong></p><p>除了主线CP之外的次要CP和角色互动。</p><p><strong>名场面索引</strong></p><table><tbody><tr class="odd"><td><strong>话数</strong></td><td><strong>场景描述</strong></td><td><strong>CP指数</strong></td><td><strong>篇章标签</strong></td></tr><tr class="even"><td>天禄谛听</td><td>天禄睡觉体香吸引谛听。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>谛听执着</td><td>谛听对天禄体香的执着追求。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>天禄反应</td><td>天禄对谛听靠近的反应。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>四不像谛听</td><td>四不像把白泽拍立得卖给谛听。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>谛听需求</td><td>谛听对白泽拍立得的需求。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>天禄米糖</td><td>天禄与米糖的日常互动。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>米糖关心</td><td>米糖对天禄的关心。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>天禄七十七</td><td>天禄与七十七的同族关系。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>同族互动</td><td>天禄与七十七的同族互动。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>血脉联系</td><td>天禄与七十七之间的血脉联系。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>辟邪穷奇</td><td>辟邪与穷奇的互动。</td><td><strong>★★★☆☆</strong></td><td><strong>上古篇</strong></td></tr><tr class="odd"><td>辟邪梼杌</td><td>辟邪与梼杌的互动。</td><td><strong>★★★☆☆</strong></td><td><strong>上古篇</strong></td></tr><tr class="even"><td>饕餮咬耳朵</td><td>饕餮咬掉辟邪耳朵。</td><td><strong>★★★★☆</strong></td><td><strong>上古篇</strong></td></tr><tr class="odd"><td>辟邪三小凶现代</td><td>辟邪与三小凶在现代篇的互动。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>辟邪翔太</td><td>辟邪与翔太的互动。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>辟邪牧桑</td><td>辟邪与牧桑的互动。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>四不像金角银角</td><td>四不像与金角银角的初次相遇。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>四不像孟极</td><td>四不像与孟极的“引君入梦”相关互动。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>梦境关联</td><td>四不像与孟极在梦境中的联系。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>兔爷金角</td><td>兔爷与金角的互动。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>兔爷银角</td><td>兔爷与银角的互动。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>天禄八斤</td><td>天禄与八斤的日常互动。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>四不像战虎</td><td>四不像与战虎的互动。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>天禄核桃</td><td>天禄与核桃的互动。</td><td><strong>★★★☆☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="even"><td>辟邪天禄现代</td><td>辟邪与天禄在现代篇中的各种互动。</td><td><strong>★★★★☆</strong></td><td><strong>现代篇</strong></td></tr><tr class="odd"><td>鹿人店群像</td><td>鹿人店中各角色的群像互动。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="even"><td>天禄米糖活动</td><td>天禄与米糖一起参加活动的场景。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr><tr class="odd"><td>四不像金角银角日常</td><td>四不像与金角银角的日常互动。</td><td><strong>★★★☆☆</strong></td><td><strong>日常</strong></td></tr></tbody></table><p><strong>CP分析点评</strong></p><p>每一个角色都有自己独特的关系网络，构成了《有兽焉》丰富而立体的世界观。</p><p><strong>数据来源说明</strong></p><p>本文档内容基于以下两个主要数据来源整理：</p><ul><li><p>有兽档案馆：提供精确的话数索引和名场面描述。</p></li><li><p>萌娘百科《有兽焉》词条：提供角色关系定位、官方盖章信息。</p></li><li><p>作者lofter及直播内容：提供番外信息和作者官方暗示。</p></li></ul><p>本文档最后更新于2026年4月，涵盖至第1171话为止。</p><p><em>感谢所有为《有兽焉》CP文化做出贡献的粉们。</em></p>
+
+</div>
+    </section>
+
+    <!-- 粉丝互动 -->
+    <section id="interact" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>粉丝互动</h2>
+                <p class="section-subtitle">留下你的想法，与其他粉丝交流</p>
+            </div>
+            <div class="card">
+                <div class="message-board">
+                    <h3 class="board-title">留言板</h3>
+                    <div class="message-form">
+                        <input type="text" id="msgName" placeholder="你的昵称" maxlength="20">
+                        <textarea id="msgContent" placeholder="写下你的想法..." maxlength="500"></textarea>
+                        <button id="msgSubmit" class="btn btn-primary">发表留言</button>
+                    </div>
+                    <div id="msgList" class="message-list"></div>
+                </div>
+                <div class="external-links">
+                    <h3 class="board-title">相关链接</h3>
+                    <ul class="link-list">
+                        <li><a href="https://manga.bilibili.com/detail/mc29329" target="_blank" rel="noopener">哔哩哔哩漫画 - 《有兽焉》正版</a></li>
+                        <li><a href="https://furrywiki.org.cn/wiki/有兽焉" target="_blank" rel="noopener">福瑞百科 - 《有兽焉》条目</a></li>
+                        <li><a href="https://moegirl.uk/四不相(有兽焉)" target="_blank" rel="noopener">萌娘百科 - 四不相条目</a></li>
+                        <li><a href="https://www.bilibili.com/read/cv13167300/" target="_blank" rel="noopener">哔哩哔哩专栏 - 主线剧情梳理</a></li>
+                        <li><a href="https://www.bilibili.com/read/mobile?id=39208288" target="_blank" rel="noopener">哔哩哔哩专栏 - 建立在悲剧上的喜剧</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>本站内容仅供粉丝交流学习，所有分析基于公开信息，不代表官方立场。</p>
+            <p>《有兽焉》版权归靴下猫腰子 / 非人哉工作室所有。</p>
+            <p class="footer-contact">联系站长：<a href="https://github.com/linfon18" target="_blank" rel="noopener noreferrer">github.com/linfon18</a></p>
+        </div>
+    </footer>
+
+    <!-- 回到顶部按钮 -->
+    <button id="backToTop" class="back-to-top" title="回到顶部">&#8679;</button>
+
+    <script src="script.js"></script>
 </body>
 </html>
