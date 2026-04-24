@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>精彩图集 - 有兽FANS2</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 背景装饰 -->
+    <div class="clouds">
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+    </div>
+    <div class="stars" id="stars"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">有兽FANS2</a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">首页</a><a href="characters.html" class="nav-link">角色图鉴</a><a href="chapters.html" class="nav-link">漫画章节</a><a href="anime.html" class="nav-link">动画信息</a><a href="worldbuilding.html" class="nav-link">世界观</a><a href="gallery.html" class="nav-link active">精彩图集</a><a href="pixiu-brothers.html" class="nav-link">貔貅兄弟</a><a href="index.html#about" class="nav-link">关于</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="菜单">&#9776;</button>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        
+        <!-- 精彩图集 -->
+        <section class="section" id="gallery">
+            <div class="section-header fade-in">
+                <h2 class="section-title">精彩图集</h2>
+                <p class="section-subtitle">来自官方的角色形象</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="gallery-grid fade-in" id="galleryGrid">
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/tianlu.jpg" alt="天禄" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">天禄 - 貔貅兄弟之弟（皮皮）</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/bixie.jpg" alt="辟邪" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">辟邪 - 貔貅兄弟之兄</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/sixiang.jpg" alt="四不像" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">四不像 - 姜子牙坐骑</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/sixibuxiang.jpg" alt="四不相" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">四不相 - 始麒麟之子</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/tuye.jpg" alt="兔爷" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">兔爷 - 兔神</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/hetao.jpg" alt="核桃" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">核桃 - 鹿人店店长</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/fuzai.jpg" alt="福仔" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">福仔 - 貔貅</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/xiangtai.jpg" alt="翔太" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">翔太 - 稻荷神的小白狐</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/jinjiao.jpg" alt="金角" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">金角 - 太上老君仙童</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/yinjiao.jpg" alt="银角" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">银角 - 太上老君仙童</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/tubaosherwei.jpg" alt="吐宝神鼬" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">吐宝神鼬 - 吐宝鼠</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/fenghuang_f.jpg" alt="凤皇" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">凤皇 - 百鸟之王</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/zhanhu.jpg" alt="战虎" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">战虎 - 蚩尤坐骑</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/diting.jpg" alt="谛听" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">谛听 - 地藏菩萨坐骑</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/shiqilin.jpg" alt="始麒麟" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">始麒麟 - 万兽之祖</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/balingjun.jpg" alt="巴陵君" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">巴陵君 - 白蛇</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/yongye.jpg" alt="永夜" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">永夜</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/qinghuo.jpg" alt="擎火" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">擎火</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/panhu.jpg" alt="盘湖" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">盘湖 - 彩虹尾巴</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/xiezhi.jpg" alt="獬豸" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">獬豸 - 法兽</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/zhujian.png" alt="诸犍" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">诸犍 - 独眼兽</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/linghuzi.png" alt="令狐紫" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">令狐紫 - 紫狐</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/mowangsongshu.jpg" alt="魔王松鼠" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">魔王松鼠</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/jiazhutao.png" alt="夹竹桃" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">夹竹桃</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/taotie.jpg" alt="饕餮" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">饕餮 - 四凶之一（桃桃）</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/qiongqi.jpg" alt="穷奇" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">穷奇 - 四凶之一</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/taowu.jpg" alt="梼杌" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">梼杌 - 四凶之一</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/hundun.jpg" alt="混沌" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">混沌 - 四凶之一</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/dijiang.jpg" alt="帝江" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">帝江 - 上古神兽</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/miantao.jpg" alt="棉桃" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">棉桃</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/yingzhao.png" alt="英招" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">英招 - 昆仑守护者</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/qishiqi.png" alt="七十七" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">七十七</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/chugou.jpg" alt="刍狗" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">刍狗 - 稻草狗</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/xiaoku.jpg" alt="小髅" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">小髅 - 骷髅面具</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/zhuyin.jpg" alt="烛阴" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">烛阴 - 烛龙</div>
+                </div>
+                <div class="gallery-item" onclick="openModal(this)">
+                    <img src="images/characters/fenghuang_m.jpg" alt="凤凰" onerror="this.parentElement.style.display='none'">
+                    <div class="gallery-caption">凤凰 - 凤皇别称</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>TraeSolo3深度整理</p>
+        <p>所有内容版权归原作者所有</p>
+    </footer>
+
+    <!-- 模态框 -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- 返回顶部 -->
+    <button class="back-to-top" id="backToTop" aria-label="返回顶部">&#8593;</button>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>貔貅兄弟 - 有兽FANS2</title>
+    <meta name="description" content="辟邪与天禄，貔貅兄弟的千年羁绊。从上古到现代，跨越千年的兄弟情。">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .pixiu-hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 24px 60px;
+            position: relative;
+        }
+        .pixiu-hero-inner {
+            text-align: center;
+            max-width: 900px;
+        }
+        .pixiu-hero-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #f59e0b, #ef4444, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            letter-spacing: 0.08em;
+        }
+        .pixiu-hero-sub {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+        .pixiu-hero-quote {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 32px;
+            line-height: 1.8;
+            border-left: 3px solid var(--accent-gold);
+            padding-left: 16px;
+            text-align: left;
+        }
+        .pixiu-portraits {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        .pixiu-portrait {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .pixiu-portrait:hover {
+            transform: translateY(-8px);
+        }
+        .pixiu-portrait img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--accent-gold);
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
+            background: var(--card-bg);
+        }
+        .pixiu-portrait h3 {
+            margin-top: 12px;
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+        }
+        .pixiu-portrait .role {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .pixiu-heart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #ef4444;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.15); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.1); }
+        }
+        /* 时间线 */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent-gold), #ef4444, var(--accent-gold));
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            position: relative;
+            width: 45%;
+            padding: 24px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--card-border);
+            margin-bottom: 32px;
+            transition: transform 0.3s ease;
+        }
+        .timeline-item:hover {
+            transform: translateY(-4px);
+        }
+        .timeline-item:nth-child(odd) {
+            margin-left: 5%;
+        }
+        .timeline-item:nth-child(even) {
+            margin-left: 50%;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            border: 3px solid var(--sky-top);
+        }
+        .timeline-item:nth-child(odd)::before {
+            right: -8%;
+            transform: translateX(50%);
+        }
+        .timeline-item:nth-child(even)::before {
+            left: -8%;
+            transform: translateX(-50%);
+        }
+        .timeline-era {
+            font-size: 0.85rem;
+            color: var(--accent-warm);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+        .timeline-title {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .timeline-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        .timeline-text em {
+            color: var(--accent-warm);
+            font-style: normal;
+        }
+        /* 对比卡片 */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+            align-items: start;
+        }
+        .compare-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--card-border);
+            padding: 32px 24px;
+            text-align: center;
+        }
+        .compare-card img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--accent-gold);
+            margin-bottom: 16px;
+            background: var(--card-bg);
+        }
+        .compare-card h3 {
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            margin-bottom: 4px;
+        }
+        .compare-card .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        .compare-card .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-size: 0.9rem;
+        }
+        .compare-card .info-label {
+            color: var(--text-muted);
+        }
+        .compare-card .info-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .compare-vs {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #ef4444;
+            font-weight: 900;
+            padding-top: 80px;
+        }
+        /* 名言卡片 */
+        .quote-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .quote-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--card-border);
+            padding: 24px;
+            position: relative;
+        }
+        .quote-card::before {
+            content: '"';
+            position: absolute;
+            top: 8px;
+            left: 16px;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            opacity: 0.3;
+            line-height: 1;
+        }
+        .quote-card .quote-text {
+            font-size: 1rem;
+            color: var(--text-primary);
+            line-height: 1.8;
+            margin-bottom: 12px;
+            padding-top: 16px;
+        }
+        .quote-card .quote-source {
+            font-size: 0.85rem;
+            color: var(--accent-warm);
+            text-align: right;
+        }
+        /* 关系图 */
+        .relation-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .relation-center {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin: 32px 0;
+        }
+        .relation-node {
+            text-align: center;
+        }
+        .relation-node img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--accent-gold);
+            margin-bottom: 8px;
+            background: var(--card-bg);
+        }
+        .relation-node .name {
+            font-size: 1rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+        .relation-node .rel {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .relation-line {
+            text-align: center;
+            color: var(--accent-warm);
+            font-size: 1.2rem;
+            margin: 8px 0;
+        }
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .timeline-item { width: calc(100% - 50px); margin-left: 50px !important; }
+            .timeline-item::before { left: -30px !important; right: auto !important; transform: none !important; }
+            .compare-grid { grid-template-columns: 1fr; }
+            .compare-vs { padding-top: 0; }
+            .pixiu-portraits { gap: 20px; }
+            .pixiu-portrait img { width: 130px; height: 130px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景装饰 -->
+    <div class="clouds">
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+    </div>
+    <div class="stars" id="stars"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">有兽FANS2</a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="characters.html" class="nav-link">角色图鉴</a>
+                <a href="chapters.html" class="nav-link">漫画章节</a>
+                <a href="anime.html" class="nav-link">动画信息</a>
+                <a href="worldbuilding.html" class="nav-link">世界观</a>
+                <a href="gallery.html" class="nav-link">精彩图集</a>
+                <a href="pixiu-brothers.html" class="nav-link active">貔貅兄弟</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="菜单">&#9776;</button>
+        </div>
+    </nav>
+
+    <div class="main-content">
+
+        <!-- 英雄区域 -->
+        <section class="pixiu-hero">
+            <div class="pixiu-hero-inner fade-in">
+                <h1 class="pixiu-hero-title">貔貅兄弟</h1>
+                <p class="pixiu-hero-sub">辟邪 × 天禄</p>
+                <div class="pixiu-hero-quote">
+                    "辟邪很是自信的表示自己是哥哥，哥哥会保护弟弟的。"<br>
+                    —— 混沌初分，鸿蒙始判，天地未开之际
+                </div>
+                <div class="pixiu-portraits">
+                    <div class="pixiu-portrait">
+                        <img src="images/characters/bixie.jpg" alt="辟邪">
+                        <h3>辟邪</h3>
+                        <p class="role">兄 · 暴躁护短</p>
+                    </div>
+                    <div class="pixiu-heart">&#10084;</div>
+                    <div class="pixiu-portrait">
+                        <img src="images/characters/tianlu.jpg" alt="天禄">
+                        <h3>天禄</h3>
+                        <p class="role">弟 · 豪爽贪吃</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 角色对比 -->
+        <section class="section" id="compare">
+            <div class="section-header fade-in">
+                <h2 class="section-title">兄弟档案</h2>
+                <p class="section-subtitle">同卵双生，性格迥异，命运交织</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="compare-grid fade-in">
+                <div class="compare-card">
+                    <img src="images/characters/bixie.jpg" alt="辟邪">
+                    <h3>辟邪</h3>
+                    <p class="subtitle">别称：小梅花、恶犬、疯狗</p>
+                    <div class="info-row"><span class="info-label">性别</span><span class="info-value">雄性</span></div>
+                    <div class="info-row"><span class="info-label">生日</span><span class="info-value">4月5日</span></div>
+                    <div class="info-row"><span class="info-label">星座</span><span class="info-value">白羊座</span></div>
+                    <div class="info-row"><span class="info-label">物种</span><span class="info-value">貔貅</span></div>
+                    <div class="info-row"><span class="info-label">首次登场</span><span class="info-value">第97话（露角）</span></div>
+                    <div class="info-row"><span class="info-label">眼睛</span><span class="info-value">金色渐变绿色</span></div>
+                    <div class="info-row"><span class="info-label">特征</span><span class="info-value">左耳缺口、臀部梅花纹</span></div>
+                    <div class="info-row"><span class="info-label">性格</span><span class="info-value">暴躁、护短、傲娇</span></div>
+                    <div class="info-row"><span class="info-label">食物</span><span class="info-value">金玉（与天禄相同），后因金玉耗尽改食恶灵</span></div>
+                    <div class="info-row"><span class="info-label">配音</span><span class="info-value">山新</span></div>
+                    <div class="info-row"><span class="info-label">知音</span><span class="info-value">花椒</span></div>
+                </div>
+                <div class="compare-vs">VS</div>
+                <div class="compare-card">
+                    <img src="images/characters/tianlu.jpg" alt="天禄">
+                    <h3>天禄</h3>
+                    <p class="subtitle">别称：皮皮</p>
+                    <div class="info-row"><span class="info-label">性别</span><span class="info-value">雄性</span></div>
+                    <div class="info-row"><span class="info-label">生日</span><span class="info-value">4月5日</span></div>
+                    <div class="info-row"><span class="info-label">星座</span><span class="info-value">白羊座</span></div>
+                    <div class="info-row"><span class="info-label">物种</span><span class="info-value">貔貅</span></div>
+                    <div class="info-row"><span class="info-label">首次登场</span><span class="info-value">第1话</span></div>
+                    <div class="info-row"><span class="info-label">眼睛</span><span class="info-value">绿色渐变金色</span></div>
+                    <div class="info-row"><span class="info-label">特征</span><span class="info-value">蓝色云纹角、贪吃</span></div>
+                    <div class="info-row"><span class="info-label">性格</span><span class="info-value">豪爽、贪吃、直率</span></div>
+                    <div class="info-row"><span class="info-label">食物</span><span class="info-value">金玉</span></div>
+                    <div class="info-row"><span class="info-label">配音</span><span class="info-value">杨凝（动画）/ 海绵（有声漫画）</span></div>
+                    <div class="info-row"><span class="info-label">所在地</span><span class="info-value">鹿人店/彩云山脉</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 千年羁绊时间线 -->
+        <section class="section" id="timeline">
+            <div class="section-header fade-in">
+                <h2 class="section-title">千年羁绊</h2>
+                <p class="section-subtitle">从同一颗蛋中诞生，跨越千年的兄弟情</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="timeline fade-in">
+                <div class="timeline-item">
+                    <div class="timeline-era">上古篇 · 诞生（第140话起）</div>
+                    <div class="timeline-title">同卵双生</div>
+                    <div class="timeline-text">混沌初分，鸿蒙始判，天地未开之际，辟邪与天禄先后从<em>同一颗双黄蛋</em>中诞生。辟邪先破壳而出，自信地说："我是哥哥，哥哥会保护弟弟的。"天禄则回怼："什么哥哥，不过就早出壳几秒钟而已。"</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-era">上古篇 · 命名（第140话）</div>
+                    <div class="timeline-title">苍天老登的恶趣味</div>
+                    <div class="timeline-text">蛋壳上有两段语音，天禄选了14秒的那段，得名"天禄"；辟邪选了17秒的那段，得名"辟邪"。紧接着蛋壳自毁爆炸，貔貅兄弟有了自己的名字，也背负起了各自不同的命运。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-era">上古篇 · 四兽家庭（第140-200话）</div>
+                    <div class="timeline-title">帝江与混沌</div>
+                    <div class="timeline-text">辟邪外出觅食时，天禄结识了帝江。辟邪起初将她当做怪物，检查无害后才接纳。后来帝江拐回了混沌，<em>四兽家庭</em>正式组成。混沌打出一个爪爪山洞，四只神兽一起度过了漫长的光阴。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-era">上古篇 · 悲剧（第191-200话）</div>
+                    <div class="timeline-title">九乌陨落</div>
+                    <div class="timeline-text">因后羿射日，九乌陨落。帝江放走了最后一只三足金乌金十，从而死亡。混沌试图追回金乌，消失不见。貔貅兄弟开始了漫长的等待，睡在帝江的怀里，<em>长睡不醒，一等经年</em>。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-era">中古篇 · 失散（第261-262话）</div>
+                    <div class="timeline-title">山沟分离</div>
+                    <div class="timeline-text">一睡几百年，辟邪种下一颗种子标记帝江长眠之地。跨越山沟时天禄爪滑坠落，与辟邪失散。辟邪崩溃哭泣，被一只麒麟——<em>四不相</em>——救起。最终在麒麟洞重逢，喜极而泣的兄弟紧紧拥抱，<em>发誓永远不分离</em>。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-era">中古篇 · 名场面（第284-300话）</div>
+                    <div class="timeline-title">被雷劈的貔咔貅</div>
+                    <div class="timeline-text">天禄好奇四不相的来历，得知是两只麒麟生的后，若有所思地说："两只麒麟在一起能生出另一只麒麟，那我和辟邪在一起就能生出另一只貔……"话还没说完，<em>天道便劈下一雷</em>。此后天禄多次尝试不同组合，每次说到天禄和辟邪能生蛋时依旧被雷劈。（骨科党的痛）</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-era">中古篇 · 护兄（第368-376话）</div>
+                    <div class="timeline-title">为保护四不相失去左耳</div>
+                    <div class="timeline-text">回到帝江长眠之地时遇到三小只和混沌。试图挖出帝江却只挖出光芒，混沌彻底发疯化作彩云山脉。辟邪为保护四不相<em>被饕餮咬掉一小块左耳</em>，发怒变大身体打败三小只。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-era">近古篇 · 牺牲（第414-459话）</div>
+                    <div class="timeline-title">假装吃掉金球球</div>
+                    <div class="timeline-text">貔貅兄弟饿倒在山中。辟邪为了让天禄吃到更多食物，每次都<em>假装吃掉金球球</em>，再趁天禄不注意吐回去。长此以往辟邪饿到口吐紫液、爪垫发紫、浑身无力。天禄发现后为清掉辟邪体内的恶灵吃掉了所有剩余食物。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-era">近古篇 · 猎龙（第454-500话）</div>
+                    <div class="timeline-title">天禄为辟邪猎杀烛龙</div>
+                    <div class="timeline-text">为让辟邪恢复健康，天禄执意要去猎杀烛龙取肉。四不相带着天禄前去寻龙，天禄一口咬断烛龙一条龙须。被激怒的烛龙将他们吞进腹内，在烛龙腹中遇到了犼和王多足。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-era">现代篇 · 暗线（第2-97话）</div>
+                    <div class="timeline-title">辟邪就在天禄肚子里</div>
+                    <div class="timeline-text">辟邪一直住在天禄的肚子里。第2话和第10话的雕像、第12话八斤询问天禄哥哥的去向、第36话饕餮提到"兄弟"、第38话食物列表中的神秘黑影、第84话国王游戏中众角色提到天禄的哥哥——<em>第97话</em>，天禄肚子里的金币堆中终于露出了辟邪的两角。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-era">现代篇 · 暴怒（第500话）</div>
+                    <div class="timeline-title">辟邪得知天禄失忆</div>
+                    <div class="timeline-text">辟邪在第500话因得知天禄被天庭陷害后不记得自己而<em>暴怒</em>。经四不像劝说后开始与失忆的天禄交朋友，并试图让天禄找回记忆。天禄为辟邪准备了一个山洞作为他们貔貅兄弟的巢穴。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-era">现代篇 · 心锁（第800-900话）</div>
+                    <div class="timeline-title">心锁动摇与破除</div>
+                    <div class="timeline-text">第800话，天禄看见镜子中四不像不是白色而是黄色，心锁开始动摇，抓伤四不像离开鹿人店。<em>第900话</em>，四不再隐瞒一切，摘掉面具坦白一切，天禄彻底破除心锁恢复记忆，选择离开前去寻找辟邪。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-era">现代篇 · 团圆（第1000话）</div>
+                    <div class="timeline-title">千年后的团聚</div>
+                    <div class="timeline-text">第1000话，<em>天禄和辟邪在帝江与混沌灵魂化成的光芒帮助之下终于团聚</em>。面对辟邪的询问，天禄选择隐瞒四不相的事情。此后兄弟二人在彩云山脉生活。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 经典语录 -->
+        <section class="section" id="quotes">
+            <div class="section-header fade-in">
+                <h2 class="section-title">经典语录</h2>
+                <p class="section-subtitle">那些让人又哭又笑的兄弟日常</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="quote-cards fade-in">
+                <div class="quote-card">
+                    <div class="quote-text">什么哥哥，不过就早出壳几秒钟而已。</div>
+                    <div class="quote-source">—— 天禄</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">我是哥哥，哥哥会保护弟弟的。</div>
+                    <div class="quote-source">—— 辟邪（刚出生时）</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">两只麒麟在一起能生出另一只麒麟，那我和辟邪在一起就能生出另一只貔……</div>
+                    <div class="quote-source">—— 天禄（被雷劈前）</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">貔貅兄弟发誓，兄弟永远不分离。（某种意义上来说确实永远没有分离）</div>
+                    <div class="quote-source">—— 中古篇·重逢</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">辟邪唱的歌很烂，让帝江饱受摧残，独自外出散步。</div>
+                    <div class="quote-source">—— 上古篇日常</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">辟邪为了让天禄吃到更多的食物，每次都假装吃掉金球球，再趁着天禄不注意将金球球吐回去。</div>
+                    <div class="quote-source">—— 近古篇（最催泪的细节）</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">长睡不醒，一等经年。</div>
+                    <div class="quote-source">—— 帝江死后，貔貅兄弟的漫长等待</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">只进不出，只吃不拉。真·有口无肛门腔肠动物×2</div>
+                    <div class="quote-source">—— wiki编辑的暴论</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关系图 -->
+        <section class="section" id="relations">
+            <div class="section-header fade-in">
+                <h2 class="section-title">关系图谱</h2>
+                <p class="section-subtitle">貔貅兄弟的重要羁绊</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="relation-section fade-in">
+                <div class="relation-center">
+                    <div class="relation-node">
+                        <img src="images/characters/bixie.jpg" alt="辟邪">
+                        <div class="name">辟邪</div>
+                        <div class="rel">哥哥</div>
+                    </div>
+                    <div class="relation-line">&#10084; 同卵双生 &#10084;</div>
+                    <div class="relation-node">
+                        <img src="images/characters/tianlu.jpg" alt="天禄">
+                        <div class="name">天禄</div>
+                        <div class="rel">弟弟（皮皮）</div>
+                    </div>
+                </div>
+                <div class="relation-center">
+                    <div class="relation-node">
+                        <img src="images/characters/dijiang.jpg" alt="帝江">
+                        <div class="name">帝江</div>
+                        <div class="rel">挚友（已故）</div>
+                    </div>
+                    <div class="relation-node">
+                        <img src="images/characters/hundun.jpg" alt="混沌">
+                        <div class="name">混沌</div>
+                        <div class="rel">家人（化作彩云山脉）</div>
+                    </div>
+                    <div class="relation-node">
+                        <img src="images/characters/sixibuxiang.jpg" alt="四不相">
+                        <div class="name">四不相</div>
+                        <div class="rel">兄弟</div>
+                    </div>
+                </div>
+                <div class="relation-center">
+                    <div class="relation-node">
+                        <img src="images/characters/taotie.jpg" alt="饕餮">
+                        <div class="name">饕餮</div>
+                        <div class="rel">咬掉辟邪左耳</div>
+                    </div>
+                    <div class="relation-node">
+                        <img src="images/characters/zhuyin.jpg" alt="烛阴">
+                        <div class="name">烛龙</div>
+                        <div class="rel">天禄猎杀对象</div>
+                    </div>
+                    <div class="relation-node">
+                        <img src="images/characters/qishiqi.png" alt="七十七">
+                        <div class="name">七十七</div>
+                        <div class="rel">同族</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 趣味知识 -->
+        <section class="section" id="trivia">
+            <div class="section-header fade-in">
+                <h2 class="section-title">趣味知识</h2>
+                <p class="section-subtitle">关于貔貅兄弟你可能不知道的事</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="quote-cards fade-in">
+                <div class="quote-card">
+                    <div class="quote-text">&#129412; 貔貅没有肛门，只进不出。所以天禄吞了地图后取不出来——明知自己只进不出还吃地图的屑。</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">&#127874; 辟邪原本和天禄一样以金玉为食。后因金玉几乎被吃光，辟邪外出寻找食物时发现恶灵也能充饥，于是改食恶灵。而天禄至今仍以金玉为食。</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">&#127911; 辟邪唱歌非常难听，曾让帝江饱受摧残。帝江只好独自外出散步，结果遇到了混沌。</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">&#128056; 辟邪最初住在天禄的肚子里，并在那里养了很多鸡，也养过螃蟹（因喂食五仁月饼而死亡）。</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">&#127754; 辟邪的左耳缺口是被饕餮咬掉的，原因是辟邪为保护四不相与三小只开战。</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">&#9889; 天禄每次试图说"天禄和辟邪能生蛋"都会被天道劈雷。试了三次，被劈了三次。天道：拒绝骨科。</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">&#128564; 困兽岛其实是<em>天禄的心锁梦境</em>。作者靴猫和晓航曾在微博确认。第498话中核桃进入天禄梦境后表示"今晚也是铁笼梦呢"，第553话中远处小山沉没的场景疑似困兽岛最后沉没——据此可以认为困兽岛是天禄内心囚禁辟邪的具象化。</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>TraeSolo3深度整理</p>
+        <p>所有内容版权归原作者所有</p>
+    </footer>
+
+    <!-- 返回顶部 -->
+    <button class="back-to-top" id="backToTop" aria-label="返回顶部">&#8593;</button>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

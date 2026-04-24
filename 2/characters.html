@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>角色图鉴 - 有兽FANS2</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 背景装饰 -->
+    <div class="clouds">
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+    </div>
+    <div class="stars" id="stars"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">有兽FANS2</a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">首页</a><a href="characters.html" class="nav-link active">角色图鉴</a><a href="chapters.html" class="nav-link">漫画章节</a><a href="anime.html" class="nav-link">动画信息</a><a href="worldbuilding.html" class="nav-link">世界观</a><a href="gallery.html" class="nav-link">精彩图集</a><a href="pixiu-brothers.html" class="nav-link">貔貅兄弟</a><a href="index.html#about" class="nav-link">关于</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="菜单">&#9776;</button>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        
+        <!-- 角色图鉴 -->
+        <section class="section" id="characters">
+            <div class="section-header fade-in">
+                <h2 class="section-title">角色图鉴</h2>
+                <p class="section-subtitle">收录所有登场神兽、凶兽及人类角色</p>
+                <div class="section-divider"></div>
+            </div>
+            <div class="filter-bar fade-in">
+                <input type="text" class="search-box" id="charSearch" placeholder="搜索角色名称、类型、属性...">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="神兽">神兽</button>
+                <button class="filter-btn" data-filter="凶兽">凶兽</button>
+                <button class="filter-btn" data-filter="远古神兽">远古神兽</button>
+                <button class="filter-btn" data-filter="人类">人类</button>
+                <select class="sort-select" id="charSort">
+                    <option value="name">按名称排序</option>
+                    <option value="first_ep">按首次登场排序</option>
+                    <option value="total_ep">按出场次数排序</option>
+                </select>
+            </div>
+            <div class="character-grid" id="characterGrid">
+                
+    <div class="character-card" data-name="天禄" data-type="神兽" data-status="在世" data-element="天">
+        <div class="card-image-wrapper">
+            <img src="images/characters/tianlu.jpg" alt="天禄" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>天</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">天禄（貔貅）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">天</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第1话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">404话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第1004话</span></div>
+            </div>
+            <p class="card-desc">貔貅兄弟中的弟弟，小名皮皮。性格豪爽直率，是鹿人店的核心成员。与哥哥辟邪感情深厚，曾经历上古、中古、近古多个时代，见证了无数神兽的悲欢离合。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 鹿人店
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="辟邪" data-type="神兽" data-status="在世" data-element="天">
+        <div class="card-image-wrapper">
+            <img src="images/characters/bixie.jpg" alt="辟邪" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>辟</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">辟邪（貔貅）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">天</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第97话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">152话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第未知话</span></div>
+            </div>
+            <p class="card-desc">貔貅兄弟中的哥哥，性格沉稳可靠。第97话首次露角登场。与弟弟天禄失散多年后重逢，目前生活在鹿人店。拥有辟邪驱凶的能力，是天禄最信赖的兄长。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 鹿人店
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="四不像" data-type="神兽" data-status="在世" data-element="地">
+        <div class="card-image-wrapper">
+            <img src="images/characters/sixiang.jpg" alt="四不像" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>四</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">四不像（姜子牙坐骑）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">地</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第1话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">421话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第1053话</span></div>
+            </div>
+            <p class="card-desc">姜子牙的坐骑，外形似鹿非鹿、似牛非牛、似马非马、似驴非驴。性格憨厚老实，是鹿人店的元老级成员。出场次数最多的角色之一，几乎贯穿全部故事线。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 鹿人店
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="四不相" data-type="神兽" data-status="死亡" data-element="地">
+        <div class="card-image-wrapper">
+            <img src="images/characters/sixibuxiang.jpg" alt="四不相" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>四</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">四不相（始麒麟之子）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">地</span>
+                <span class="tag tag-status" style="color:#f87171">死亡</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第300话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">55话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第未知话</span></div>
+            </div>
+            <p class="card-desc">始麒麟之子，与四不像（姜子牙坐骑）是不同的角色。在中古篇中与貔貅兄弟结伴旅行，最终不幸离世。其死亡对天禄和辟邪产生了深远影响。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 已故
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="兔爷" data-type="神兽" data-status="在世" data-element="月">
+        <div class="card-image-wrapper">
+            <img src="images/characters/tuye.jpg" alt="兔爷" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>兔</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">兔爷（兔神）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">月</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第1话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">249话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第1013话</span></div>
+            </div>
+            <p class="card-desc">身穿铠甲的兔形神兽，性格沉稳可靠。拥有强大的战斗力，是鹿人店的守护者之一。铠甲下隐藏着不为人知的过去。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 鹿人店
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="核桃" data-type="人类" data-status="在世" data-element="无">
+        <div class="card-image-wrapper">
+            <img src="images/characters/hetao.jpg" alt="核桃" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>核</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">核桃</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">人类</span>
+                <span class="tag tag-element">无</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第1话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">172话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第未知话</span></div>
+            </div>
+            <p class="card-desc">鹿人店的店长，人类少年。善良热心，收留了众多神兽。虽然身为凡人，却能与神兽们和谐相处，是连接人间与神兽世界的桥梁。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 鹿人店
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="福仔" data-type="神兽" data-status="在世" data-element="福">
+        <div class="card-image-wrapper">
+            <img src="images/characters/fuzai.jpg" alt="福仔" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>福</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">福仔</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">福</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第1话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">102话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第未知话</span></div>
+            </div>
+            <p class="card-desc">小巧可爱的神兽，拥有带来福运的能力。性格活泼好动，是鹿人店的开心果。经常在关键时刻发挥意想不到的作用。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 鹿人店
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="翔太" data-type="人类" data-status="在世" data-element="无">
+        <div class="card-image-wrapper">
+            <img src="images/characters/xiangtai.jpg" alt="翔太" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>翔</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">翔太</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">人类</span>
+                <span class="tag tag-element">无</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第1话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">未知话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第未知话</span></div>
+            </div>
+            <p class="card-desc">核桃的好友，经常出现在鹿人店。为人热情开朗，对神兽们充满好奇。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 鹿人店
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="金角" data-type="神兽" data-status="在世" data-element="金">
+        <div class="card-image-wrapper">
+            <img src="images/characters/jinjiao.jpg" alt="金角" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>金</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">金角</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">金</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第4话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">101话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第936话</span></div>
+            </div>
+            <p class="card-desc">头生金角的年轻神兽，性格急躁但重情义。与银角是兄弟，擅长炼丹术。在鹿人店中负责各种杂务，是团队中的行动派。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 鹿人店
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="银角" data-type="神兽" data-status="在世" data-element="银">
+        <div class="card-image-wrapper">
+            <img src="images/characters/yinjiao.jpg" alt="银角" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>银</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">银角</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">银</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第4话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">105话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第936话</span></div>
+            </div>
+            <p class="card-desc">头生银角的年轻神兽，性格温和细心。与金角是兄弟，擅长医术。在鹿人店中负责照顾受伤的神兽，是团队中的治愈者。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 鹿人店
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="吐宝神鼬" data-type="神兽" data-status="在世" data-element="宝">
+        <div class="card-image-wrapper">
+            <img src="images/characters/tubaosherwei.jpg" alt="吐宝神鼬" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>吐</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">吐宝神鼬（吐宝鼠）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">宝</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第5话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">未知话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第1124话</span></div>
+            </div>
+            <p class="card-desc">来自吐宝神教的神鼬，拥有吐出宝珠的能力。性格忠诚正直，宝珠具有强大的力量。与天禄等人结为好友，经常在关键时刻提供帮助。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 吐宝神教
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="凤皇" data-type="神兽" data-status="在世" data-element="火">
+        <div class="card-image-wrapper">
+            <img src="images/characters/fenghuang_f.jpg" alt="凤皇" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>凤</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">凤皇（凤凰）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">火</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第47话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">未知话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第841话</span></div>
+            </div>
+            <p class="card-desc">百鸟之王，拥有浴火重生的能力。外表华丽威严，性格高傲但内心善良。在上古时代就与貔貅兄弟有渊源。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 凤凰山
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="战虎" data-type="神兽" data-status="在世" data-element="战">
+        <div class="card-image-wrapper">
+            <img src="images/characters/zhanhu.jpg" alt="战虎" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>战</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">战虎</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">战</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第58话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">52话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第979话</span></div>
+            </div>
+            <p class="card-desc">身经百战的老虎神兽，性格豪迈勇猛。拥有丰富的战斗经验，是鹿人店中最强的战斗力之一。虽然外表凶悍，但对同伴十分温柔。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 鹿人店
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="谛听" data-type="神兽" data-status="在世" data-element="地">
+        <div class="card-image-wrapper">
+            <img src="images/characters/diting.jpg" alt="谛听" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>谛</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">谛听（地藏菩萨坐骑）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">地</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第7话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">未知话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第未知话</span></div>
+            </div>
+            <p class="card-desc">地藏菩萨的坐骑，能听辨世间万物。性格沉稳睿智，拥有洞察真相的能力。经常为鹿人店的众人提供指引和建议。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 地府
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="始麒麟" data-type="远古神兽" data-status="在世" data-element="地">
+        <div class="card-image-wrapper">
+            <img src="images/characters/shiqilin.jpg" alt="始麒麟" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>始</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">始麒麟（万兽之祖）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">远古神兽</span>
+                <span class="tag tag-element">地</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第未知话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">14话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第未知话</span></div>
+            </div>
+            <p class="card-desc">万兽之祖，四不相的父亲。在上古时代是所有神兽的领袖，拥有至高无上的地位。虽然出场不多，但对整个故事线有着深远的影响。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 麒麟山
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="巴陵君" data-type="神兽" data-status="在世" data-element="水">
+        <div class="card-image-wrapper">
+            <img src="images/characters/balingjun.jpg" alt="巴陵君" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>巴</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">巴陵君</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">水</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第未知话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">51话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第1013话</span></div>
+            </div>
+            <p class="card-desc">来自巴陵的神秘神兽，性格优雅从容。拥有操控水的能力，与鹿人店的众人有着千丝万缕的联系。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 巴陵
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="永夜" data-type="神兽" data-status="在世" data-element="暗">
+        <div class="card-image-wrapper">
+            <img src="images/characters/yongye.jpg" alt="永夜" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>永</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">永夜</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">暗</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第未知话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">28话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第987话</span></div>
+            </div>
+            <p class="card-desc">神秘的暗属性神兽，行踪不定。拥有操控黑暗的能力，性格冷峻寡言。其真实身份和目的仍是故事中的重要谜团。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 未知
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="擎火" data-type="神兽" data-status="在世" data-element="火">
+        <div class="card-image-wrapper">
+            <img src="images/characters/qinghuo.jpg" alt="擎火" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>擎</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">擎火</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">火</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第未知话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">28话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第938话</span></div>
+            </div>
+            <p class="card-desc">火属性神兽，拥有强大的火焰操控能力。性格热情奔放，与凤皇有着特殊的渊源。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 未知
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="盘湖" data-type="神兽" data-status="在世" data-element="水">
+        <div class="card-image-wrapper">
+            <img src="images/characters/panhu.jpg" alt="盘湖" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>盘</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">盘湖</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">水</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第612话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">16话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第961话</span></div>
+            </div>
+            <p class="card-desc">水属性神兽，首次登场于第612话。性格温和内敛，与巴陵君同为水系神兽，但能力方向不同。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 未知
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="獬豸" data-type="神兽" data-status="在世" data-element="法">
+        <div class="card-image-wrapper">
+            <img src="images/characters/xiezhi.jpg" alt="獬豸" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>獬</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">獬豸（法兽）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">法</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第未知话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">未知话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第835话</span></div>
+            </div>
+            <p class="card-desc">能辨是非曲直的法兽，拥有看透真相的能力。性格公正严明，是天界司法的象征。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 未知
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="诸犍" data-type="凶兽" data-status="在世" data-element="力">
+        <div class="card-image-wrapper">
+            <img src="images/characters/zhujian.png" alt="诸犍" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>诸</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">诸犍</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">凶兽</span>
+                <span class="tag tag-element">力</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第未知话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">21话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第987话</span></div>
+            </div>
+            <p class="card-desc">上古凶兽之一，拥有强大的力量。性格暴躁好斗，但随着故事发展逐渐展现出不同的一面。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 未知
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="令狐紫" data-type="神兽" data-status="在世" data-element="幻">
+        <div class="card-image-wrapper">
+            <img src="images/characters/linghuzi.png" alt="令狐紫" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>令</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">令狐紫</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">幻</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第未知话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">17话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第966话</span></div>
+            </div>
+            <p class="card-desc">拥有幻术能力的神秘神兽，行踪飘忽不定。性格狡黠机智，难以捉摸其真实想法。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 未知
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="魔王松鼠" data-type="凶兽" data-status="死亡" data-element="暗">
+        <div class="card-image-wrapper">
+            <img src="images/characters/mowangsongshu.jpg" alt="魔王松鼠" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>魔</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">魔王松鼠（松鼠大哥）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">凶兽</span>
+                <span class="tag tag-element">暗</span>
+                <span class="tag tag-status" style="color:#f87171">死亡</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第6话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">26话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第754话</span></div>
+            </div>
+            <p class="card-desc">曾经称霸一方的松鼠凶兽，拥有强大的暗属性力量。虽然被称为&quot;魔王&quot;，但内心深处有着柔软的一面。其死亡是故事中令人动容的篇章。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 已故
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="夹竹桃" data-type="神兽" data-status="在世" data-element="毒">
+        <div class="card-image-wrapper">
+            <img src="images/characters/jiazhutao.png" alt="夹竹桃" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>夹</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">夹竹桃</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">毒</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第未知话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">29话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第979话</span></div>
+            </div>
+            <p class="card-desc">拥有毒属性能力的神兽，外表美丽但危险。性格复杂多面，在故事中扮演着亦正亦邪的角色。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 未知
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="饕餮" data-type="凶兽" data-status="在世" data-element="贪">
+        <div class="card-image-wrapper">
+            <img src="images/characters/taotie.jpg" alt="饕餮" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>饕</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">饕餮（四凶之一）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">凶兽</span>
+                <span class="tag tag-element">贪</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第36话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">52话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第903话</span></div>
+            </div>
+            <p class="card-desc">上古四凶之一，以贪食著称。拥有吞噬万物的能力，食欲无穷无尽。在故事中是一个令人又爱又恨的角色。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 未知
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="穷奇" data-type="凶兽" data-status="在世" data-element="恶">
+        <div class="card-image-wrapper">
+            <img src="images/characters/qiongqi.jpg" alt="穷奇" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>穷</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">穷奇（四凶之一）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">凶兽</span>
+                <span class="tag tag-element">恶</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第133话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">32话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第711话</span></div>
+            </div>
+            <p class="card-desc">上古四凶之一，以惩善扬恶著称。外形似虎生翼，拥有强大的战斗力。性格残忍狡诈，是鹿人店众人面临的强大对手。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 未知
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="梼杌" data-type="凶兽" data-status="在世" data-element="顽">
+        <div class="card-image-wrapper">
+            <img src="images/characters/taowu.jpg" alt="梼杌" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>梼</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">梼杌（四凶之一）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">凶兽</span>
+                <span class="tag tag-element">顽</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第207话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">23话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第903话</span></div>
+            </div>
+            <p class="card-desc">上古四凶之一，以顽固不化著称。外形似虎犬，拥有坚硬的躯体。性格固执己见，一旦认定的事情绝不改变。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 未知
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="混沌" data-type="凶兽" data-status="在世" data-element="混沌">
+        <div class="card-image-wrapper">
+            <img src="images/characters/hundun.jpg" alt="混沌" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>混</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">混沌（四凶之一）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">凶兽</span>
+                <span class="tag tag-element">混沌</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第未知话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">未知话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第未知话</span></div>
+            </div>
+            <p class="card-desc">上古四凶之一，没有固定形态。在上古时代与帝江有着复杂的纠葛，帝江之死使其陷入疯狂。后化为彩云山脉，成为故事中最重要的转折点之一。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 彩云山脉
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="帝江" data-type="远古神兽" data-status="死亡" data-element="混沌">
+        <div class="card-image-wrapper">
+            <img src="images/characters/dijiang.jpg" alt="帝江" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>帝</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">帝江（上古神兽）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">远古神兽</span>
+                <span class="tag tag-element">混沌</span>
+                <span class="tag tag-status" style="color:#f87171">死亡</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第未知话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">未知话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第未知话</span></div>
+            </div>
+            <p class="card-desc">上古时代的强大神兽，与混沌有着深厚的羁绊。其死亡是整个故事中最令人心碎的事件之一，直接导致了混沌的疯狂和后续一系列悲剧。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 已故
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="棉桃" data-type="神兽" data-status="在世" data-element="棉">
+        <div class="card-image-wrapper">
+            <img src="images/characters/miantao.jpg" alt="棉桃" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>棉</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">棉桃</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">棉</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第未知话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">未知话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第未知话</span></div>
+            </div>
+            <p class="card-desc">外表柔软可爱的棉属性神兽，性格温柔善良。是鹿人店中深受大家喜爱的成员，经常用柔软的身躯安慰受伤的同伴。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 鹿人店
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="英招" data-type="神兽" data-status="在世" data-element="木">
+        <div class="card-image-wrapper">
+            <img src="images/characters/yingzhao.png" alt="英招" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>英</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">英招</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">木</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第未知话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">5话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第989话</span></div>
+            </div>
+            <p class="card-desc">上古神兽，拥有操控植物的能力。性格正直豪爽，虽然出场不多但每次出现都给人留下深刻印象。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 未知
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="七十七" data-type="神兽" data-status="在世" data-element="未知">
+        <div class="card-image-wrapper">
+            <img src="images/characters/qishiqi.png" alt="七十七" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>七</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">七十七</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">未知</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第1009话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">2话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第未知话</span></div>
+            </div>
+            <p class="card-desc">较晚登场的新角色，首次出现在第1009话。身份神秘，目前信息有限。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 未知
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="刍狗" data-type="神兽" data-status="在世" data-element="土">
+        <div class="card-image-wrapper">
+            <img src="images/characters/chugou.jpg" alt="刍狗" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>刍</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">刍狗</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">土</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第80话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">37话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第893话</span></div>
+            </div>
+            <p class="card-desc">土属性神兽，性格忠诚坚毅。首次登场于第80话，在故事中多次发挥重要作用。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 未知
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="小髅" data-type="亡灵" data-status="在世" data-element="死">
+        <div class="card-image-wrapper">
+            <img src="images/characters/xiaoku.jpg" alt="小髅" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>小</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">小髅</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">亡灵</span>
+                <span class="tag tag-element">死</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第17话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">未知话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第未知话</span></div>
+            </div>
+            <p class="card-desc">小小的骷髅亡灵，性格天真可爱。虽然是亡灵，但完全没有恐怖感，反而十分讨人喜欢。与鹿人店的众人关系融洽。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 鹿人店
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="凤凰" data-type="神兽" data-status="在世" data-element="火">
+        <div class="card-image-wrapper">
+            <img src="images/characters/fenghuang_m.jpg" alt="凤凰" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>凤</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">凤凰（凤皇(别称)）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">神兽</span>
+                <span class="tag tag-element">火</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第48话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">未知话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第未知话</span></div>
+            </div>
+            <p class="card-desc">与凤皇密切相关的火属性神鸟，拥有浴火重生的能力。在故事中与凤皇有着不可分割的联系。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 凤凰山
+            </div>
+        </div>
+    </div>
+    <div class="character-card" data-name="烛阴" data-type="远古神兽" data-status="在世" data-element="时">
+        <div class="card-image-wrapper">
+            <img src="images/characters/zhuyin.jpg" alt="烛阴" class="card-image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="card-image-placeholder" style="display:none;">
+                <span>烛</span>
+            </div>
+        </div>
+        <div class="card-info">
+            <h3 class="card-name">烛阴（烛龙）</h3>
+            <div class="card-tags">
+                <span class="tag tag-type">远古神兽</span>
+                <span class="tag tag-element">时</span>
+                <span class="tag tag-status" style="color:#4ade80">在世</span>
+            </div>
+            <div class="card-stats">
+                <div class="stat"><span class="stat-label">首次登场</span><span class="stat-value">第未知话</span></div>
+                <div class="stat"><span class="stat-label">出场次数</span><span class="stat-value">未知话</span></div>
+                <div class="stat"><span class="stat-label">最新出场</span><span class="stat-value">第未知话</span></div>
+            </div>
+            <p class="card-desc">镇守钟山的远古神兽，拥有操控昼夜的能力。睁眼为昼，闭眼为夜，是上古时代最强大的存在之一。</p>
+            <div class="card-location">
+                <span class="location-icon">&#9673;</span> 钟山
+            </div>
+        </div>
+    </div>
+            </div>
+            <div class="no-results" id="noResults">
+                <div class="no-results-icon">&#128269;</div>
+                <p>未找到匹配的角色</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>TraeSolo3深度整理</p>
+        <p>所有内容版权归原作者所有</p>
+    </footer>
+
+    <!-- 模态框 -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- 返回顶部 -->
+    <button class="back-to-top" id="backToTop" aria-label="返回顶部">&#8593;</button>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
